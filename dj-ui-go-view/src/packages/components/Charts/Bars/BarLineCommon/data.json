@@ -1,0 +1,60 @@
+{
+  "dimensions": [
+    "product",
+    "data1",
+    "data2",
+    "data3",
+    "data4"
+  ],
+  "source": [
+    {
+      "product": "Mon",
+      "data1": 120,
+      "data2": 130,
+      "data3": 140,
+      "data4": 190
+    },
+    {
+      "product": "Tue",
+      "data1": 200,
+      "data2": 130,
+      "data3": 150,
+      "data4": 210
+    },
+    {
+      "product": "Wed",
+      "data1": 150,
+      "data2": 312,
+      "data3": 160,
+      "data4": 230
+    },
+    {
+      "product": "Thu",
+      "data1": 80,
+      "data2": 268,
+      "data3": 180,
+      "data4": 250
+    },
+    {
+      "product": "Fri",
+      "data1": 70,
+      "data2": 155,
+      "data3": 180,
+      "data4": 170
+    },
+    {
+      "product": "Sat",
+      "data1": 110,
+      "data2": 117,
+      "data3": 240,
+      "data4": 230
+    },
+    {
+      "product": "Sun",
+      "data1": 130,
+      "data2": 160,
+      "data3": 260,
+      "data4": 270
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "dimensions": [
+    "product",
+    "data1"
+  ],
+  "source": [
+    {
+      "product": "03.05",
+      "data1": 120
+    },
+    {
+      "product": "03.06",
+      "data1": 200
+    },
+    {
+      "product": "03.07",
+      "data1": 120
+    },
+    {
+      "product": "03.08",
+      "data1": 150
+    },
+    {
+      "product": "03.09",
+      "data1": 170
+    },
+    {
+      "product": "03.10",
+      "data1": 180
+    },
+    {
+      "product": "03.11",
+      "data1": 230
+    },
+    {
+      "product": "03.12",
+      "data1": 190
+    },
+    {
+      "product": "03.13",
+      "data1": 210
+    },
+    {
+      "product": "03.14",
+      "data1": 260
+    },
+    {
+      "product": "03.15",
+      "data1": 310
+    }
+  ]
+}

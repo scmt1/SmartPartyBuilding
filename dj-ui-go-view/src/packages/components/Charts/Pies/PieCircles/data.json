@@ -1,0 +1,35 @@
+{
+  "dimensions": ["name", "value"],
+  "tit": "储存占用",
+  "tvalue": "46%",
+  "source": [
+    {
+      "name": "QQ",
+      "value": 220
+    },
+    {
+      "name": "微信",
+      "value": 200
+    },
+    {
+      "name": "视频",
+      "value": 150
+    },
+    {
+      "name": "图片",
+      "value": 80
+    },
+    {
+      "name": "系统",
+      "value": 70
+    },
+    {
+      "name": "音频",
+      "value": 110
+    },
+    {
+      "name": "日志",
+      "value": 130
+    }
+  ]
+}

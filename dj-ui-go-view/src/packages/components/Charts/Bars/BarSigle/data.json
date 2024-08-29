@@ -1,0 +1,32 @@
+{
+  "dimensions": [
+    "product",
+    "data1"
+  ],
+  "source": [
+    {
+      "product": "监测中心站",
+      "data1": 120
+    },
+    {
+      "product": "调查中心",
+      "data1": 200
+    },
+    {
+      "product": "核与辐射安全中心",
+      "data1": 150
+    },
+    {
+      "product": "宣传教育中心",
+      "data1": 80
+    },
+    {
+      "product": "健康数据安全中心",
+      "data1": 150
+    },
+    {
+      "product": "生活服务平台",
+      "data1": 850
+    }
+  ]
+}

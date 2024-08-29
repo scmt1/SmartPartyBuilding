@@ -1,0 +1,24 @@
+{
+  "dimensions": [
+    "name",
+    "value"
+  ],
+  "source": [
+    {
+      "name": "1-3年",
+      "value": 120
+    },
+    {
+      "name": "3-5年",
+      "value": 200
+    },
+    {
+      "name": "5-8年",
+      "value": 150
+    },
+    {
+      "name": "8年以上",
+      "value": 80
+    }
+  ]
+}

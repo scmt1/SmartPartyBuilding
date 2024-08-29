@@ -1,0 +1,33 @@
+[
+  {
+    "name": "学员",
+    "value": 2,
+    "maxLevels": 2,
+    "children": [
+      {
+        "name": "干部人事",
+        "value": 1,
+        "children": [
+          {
+            "name": "公民出入境管理",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "name": "公民出入境管理",
+        "value": 1,
+        "children": [
+          {
+            "name": "警务技能战术",
+            "value": 0.7
+          },
+          {
+            "name": "舆情引导",
+            "value": 0.3
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,20 @@
+{
+  "source": [
+    {
+      "name": "在建",
+      "icon": "circle",
+      "value":10
+    },
+    {
+      "name": "未开始",
+      "icon": "circle",
+      "value":15
+    },
+    {
+      "name": "已完成",
+      "icon": "circle",
+      "value":18
+    }
+  ],
+  "name": "在建情况"
+}

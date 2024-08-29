@@ -1,0 +1,82 @@
+{
+  "dimensions": [
+    "product",
+    "data1",
+    "data2",
+    "data3"
+  ],
+  "source": [
+    {
+      "product": "03-03",
+      "data1": 120,
+      "data2": 130,
+      "data3": 130
+    },
+    {
+      "product": "03-04",
+      "data1": 200,
+      "data2": 130,
+      "data3": 130
+    },
+    {
+      "product": "03-05",
+      "data1": 150,
+      "data2": 312,
+      "data3": 130
+    },
+    {
+      "product": "03-06",
+      "data1": 80,
+      "data2": 268,
+      "data3": 130
+    },
+    {
+      "product": "03-07",
+      "data1": 70,
+      "data2": 155,
+      "data3": 130
+    },
+    {
+      "product": "03-08",
+      "data1": 110,
+      "data2": 117,
+      "data3": 130
+    },
+    {
+      "product": "03-09",
+      "data1": 130,
+      "data2": 160,
+      "data3": 130
+    },
+    {
+      "product": "03-10",
+      "data1": 80,
+      "data2": 268,
+      "data3": 130
+    },
+    {
+      "product": "03-11",
+      "data1": 70,
+      "data2": 155,
+      "data3": 130
+    },
+    {
+      "product": "03-12",
+      "data1": 110,
+      "data2": 117,
+      "data3": 130
+    },
+    {
+      "product": "03-13",
+      "data1": 130,
+      "data2": 160,
+      "data3": 130
+    },
+    {
+      "product": "03-14",
+      "data1": 130,
+      "data2": 160,
+      "data3": 130
+    }
+  ]
+}
