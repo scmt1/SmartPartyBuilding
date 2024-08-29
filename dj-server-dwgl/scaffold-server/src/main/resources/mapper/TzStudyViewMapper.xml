@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="me.flyray.bsin.server.mapper.TzStudyViewMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="me.flyray.bsin.server.domain.TzStudyView">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="type" jdbcType="VARCHAR" property="type"/>
+        <result column="study_id" jdbcType="INTEGER" property="studyId"/>
+        <result column="dept_ids" jdbcType="VARCHAR" property="deptIds"/>
+        <result column="party_member_ids" jdbcType="VARCHAR" property="partyMemberIds"/>
+        <result column="position_ids" jdbcType="VARCHAR" property="positionIds"/>
+        <result column="column_id" jdbcType="INTEGER" property="columnId"/>
+    </resultMap>
+
+
+    <sql id="baseColumnList">
+        id, type, study_id, dept_ids, party_member_ids, position_ids
+    </sql>
+
+    <select id="getStudyIdsByPartMember" resultType="java.lang.Integer">
+        select study_id from tz_study_view
+        <where>
+            and (
+                <if test="parentIds.size > 0">
+                    <foreach collection="parentIds" item="parentId" open="(" close=")" separator="or">
+                        (type = '1' and dept_ids like concat( '%,', #{parentId}, ',%' ))
+                        <if test="positionId!=null and positionId!= '' and positionId!='null'">
+                            or (type = '3' and position_ids like concat( '%,', #{positionId}, ',%' ) and dept_ids like concat( '%,', #{parentId}, ',%' ))
+                        </if>
+                    </foreach>
+                </if>
+                or (type = '2' and dept_ids like concat( '%,', #{deptId}, ',%' ))
+                <if test="positionId!=null and positionId!= '' and positionId!='null'">
+                    or (type = '4' and position_ids like concat( '%,', #{positionId}, ',%' ) and dept_ids like concat( '%,', #{deptId}, ',%' ))
+                </if>
+                <if test="partyMemberId!=null and partyMemberId!=''">
+                    or (type = '5' and party_member_ids like concat( '%,', #{partyMemberId}, ',%' ))
+                </if>
+            )
+            <if test="columnId != null and columnId != '' ">
+                and column_id = #{columnId}
+            </if>
+        </where>
+
+    </select>
+
+    <select id="getColumnIdsByPartMember" resultType="java.lang.Integer">
+        select column_id from tz_study_view
+        <where>
+            <if test="parentIds.size > 0">
+                or
+                <foreach collection="parentIds" item="parentId" open="(" close=")" separator="or">
+                    (type = '1' and dept_ids like concat( '%,', #{parentId}, ',%' ))
+                    <if test="positionId!=null and positionId!= '' and positionId!='null'">
+                        or (type = '3' and position_ids like concat( '%,', #{positionId}, ',%' ) and dept_ids like concat( '%,', #{parentId}, ',%' ))
+                    </if>
+                </foreach>
+            </if>
+            or (type = '2' and dept_ids like concat( '%,', #{deptId}, ',%' ))
+            <if test="positionId!=null and positionId!= '' and positionId!='null'">
+                or (type = '4' and position_ids like concat( '%,', #{positionId}, ',%' ))
+            </if>
+            <if test="partyMemberId!=null and partyMemberId!=''">
+                or (type = '5' and party_member_ids like concat( '%,', #{partyMemberId}, ',%' ))
+            </if>
+        </where>
+    </select>
+</mapper>

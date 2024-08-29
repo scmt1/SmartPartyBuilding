@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.flyray.bsin.server.mapper.TzPayFeeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="me.flyray.bsin.server.domain.TzPayFee">
+        <id column="id" property="id" />
+        <result column="dept_id" property="deptId" />
+        <result column="dept_name" property="deptName" />
+        <result column="pay_month" property="payMonth" />
+        <result column="should_pay" property="shouldPay" />
+        <result column="actually_pay" property="actuallyPay" />
+        <result column="status" property="status" />
+        <result column="create_time" property="createTime" />
+        <result column="del_flag" property="delFlag" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, dept_id, dept_name, pay_month, should_pay, actually_pay, status, create_time, del_flag
+    </sql>
+
+<!--    <select id="queryFeeTotalByYear2" resultType="java.util.Map">
+        (select actually_pay as one,dept_id  from tz_pay_fee where pay_month = date_format(#{month[0]},'%Y-%m') and dept_id=#{deptId})  union
+        (select actually_pay as two,dept_id  from tz_pay_fee where pay_month = date_format(#{month[1]},'%Y-%m') and dept_id=#{deptId})  union
+        (select actually_pay as three,dept_id  from tz_pay_fee where pay_month = date_format(#{month[2]},'%Y-%m') and dept_id=#{deptId}) union
+        (select actually_pay as four,dept_id  from tz_pay_fee where pay_month = date_format(#{month[3]},'%Y-%m') and dept_id=#{deptId}) union
+        (select actually_pay as five,dept_id  from tz_pay_fee where pay_month = date_format(#{month[4]},'%Y-%m') and dept_id=#{deptId}) union
+        (select actually_pay as six,dept_id  from tz_pay_fee where pay_month = date_format(#{month[5]},'%Y-%m') and dept_id=#{deptId}) union
+        (select actually_pay as seven,dept_id  from tz_pay_fee where pay_month = date_format(#{month[6]},'%Y-%m') and dept_id=#{deptId}) union
+        (select actually_pay as eight,dept_id  from tz_pay_fee where pay_month = date_format(#{month[7]},'%Y-%m') and dept_id=#{deptId}) union
+        (select actually_pay as nine,dept_id  from tz_pay_fee where pay_month = date_format(#{month[8]},'%Y-%m') and dept_id=#{deptId}) union
+        (select actually_pay as ten,dept_id  from tz_pay_fee where pay_month = date_format(#{month[9]},'%Y-%m') and dept_id=#{deptId}) union
+        (select actually_pay as eleven,dept_id  from tz_pay_fee where pay_month = date_format(#{month[10]},'%Y-%m') and dept_id=#{deptId}) union
+        (select actually_pay as tweleve,dept_id  from tz_pay_fee where pay_month = date_format(#{month[11]},'%Y-%m') and dept_id=#{deptId})
+    </select>-->
+    <select id="queryFeeTotalByYear" resultType="java.util.Map">
+        select
+        (select should_pay  from tz_pay_fee where pay_month =#{month[0]} and dept_id=#{deptId} and del_flag=0 ) as one,
+        (select should_pay  from tz_pay_fee where pay_month =#{month[1]} and dept_id=#{deptId} and del_flag=0 ) as two,
+        (select should_pay  from tz_pay_fee where pay_month =#{month[2]} and dept_id=#{deptId } and del_flag=0) as three,
+        (select should_pay  from tz_pay_fee where pay_month =#{month[3]} and dept_id=#{deptId } and del_flag=0) as four,
+        (select should_pay  from tz_pay_fee where pay_month =#{month[4]} and dept_id=#{deptId } and del_flag=0) as five,
+        (select should_pay  from tz_pay_fee where pay_month =#{month[5]} and dept_id=#{deptId } and del_flag=0) as six,
+        (select should_pay  from tz_pay_fee where pay_month =#{month[6]} and dept_id=#{deptId } and del_flag=0) as seven,
+        (select should_pay  from tz_pay_fee where pay_month =#{month[7]} and dept_id=#{deptId } and del_flag=0) as eight,
+        (select should_pay  from tz_pay_fee where pay_month =#{month[8]} and dept_id=#{deptId } and del_flag=0) as nine,
+        (select should_pay  from tz_pay_fee where pay_month =#{month[9]} and dept_id=#{deptId } and del_flag=0) as ten,
+        (select should_pay  from tz_pay_fee where pay_month =#{month[10]} and dept_id=#{deptId} and del_flag=0) as eleven,
+        (select should_pay  from tz_pay_fee where pay_month =#{month[11]} and dept_id=#{deptId} and del_flag=0) as twelve
+    </select>
+
+    <select id="queryFeeTotalByYears" resultType="java.util.Map">
+        select
+            (select sum(should_pay)  from tz_pay_fee_detail_log where pay_month =#{month[0]} and dept_id in
+                <foreach collection="deptIds" item="deptId" separator="," open="(" close=")">
+                    #{deptId}
+                </foreach>
+                 and del_flag=0 and order_status = 2) as one,
+            (select sum(should_pay)  from tz_pay_fee_detail_log where pay_month =#{month[1]} and dept_id in
+                <foreach collection="deptIds" item="deptId" separator="," open="(" close=")">
+                    #{deptId}
+                </foreach>
+                 and del_flag=0 and order_status = 2) as two,
+            (select sum(should_pay)  from tz_pay_fee_detail_log where pay_month =#{month[2]} and dept_id in
+                <foreach collection="deptIds" item="deptId" separator="," open="(" close=")">
+                    #{deptId}
+                </foreach>
+                 and del_flag=0 and order_status = 2) as three,
+            (select sum(should_pay)  from tz_pay_fee_detail_log where pay_month =#{month[3]} and dept_id in
+                <foreach collection="deptIds" item="deptId" separator="," open="(" close=")">
+                    #{deptId}
+                </foreach>
+                 and del_flag=0 and order_status = 2) as four,
+            (select sum(should_pay)  from tz_pay_fee_detail_log where pay_month =#{month[4]} and dept_id in
+                <foreach collection="deptIds" item="deptId" separator="," open="(" close=")">
+                    #{deptId}
+                </foreach>
+                 and del_flag=0 and order_status = 2) as five,
+            (select sum(should_pay)  from tz_pay_fee_detail_log where pay_month =#{month[5]} and dept_id in
+                <foreach collection="deptIds" item="deptId" separator="," open="(" close=")">
+                    #{deptId}
+                </foreach>
+                 and del_flag=0 and order_status = 2) as six,
+            (select sum(should_pay)  from tz_pay_fee_detail_log where pay_month =#{month[6]} and dept_id in
+                <foreach collection="deptIds" item="deptId" separator="," open="(" close=")">
+                    #{deptId}
+                </foreach>
+                 and del_flag=0 and order_status = 2) as seven,
+            (select sum(should_pay)  from tz_pay_fee_detail_log where pay_month =#{month[7]} and dept_id in
+                <foreach collection="deptIds" item="deptId" separator="," open="(" close=")">
+                    #{deptId}
+                </foreach>
+                 and del_flag=0 and order_status = 2) as eight,
+            (select sum(should_pay)  from tz_pay_fee_detail_log where pay_month =#{month[8]} and dept_id in
+                <foreach collection="deptIds" item="deptId" separator="," open="(" close=")">
+                    #{deptId}
+                </foreach>
+                 and del_flag=0 and order_status = 2) as nine,
+            (select sum(should_pay)  from tz_pay_fee_detail_log where pay_month =#{month[9]} and dept_id in
+                <foreach collection="deptIds" item="deptId" separator="," open="(" close=")">
+                    #{deptId}
+                </foreach>
+                 and del_flag=0 and order_status = 2) as ten,
+            (select sum(should_pay)  from tz_pay_fee_detail_log where pay_month =#{month[10]} and dept_id in
+                <foreach collection="deptIds" item="deptId" separator="," open="(" close=")">
+                    #{deptId}
+                </foreach>
+                 and del_flag=0 and order_status = 2) as eleven,
+            (select sum(should_pay)  from tz_pay_fee_detail_log where pay_month =#{month[11]} and dept_id in
+                <foreach collection="deptIds" item="deptId" separator="," open="(" close=")">
+                    #{deptId}
+                </foreach>
+                 and del_flag=0 and order_status = 2) as twelve
+    </select>
+
+    <select id="queryFeeTotalByMonth" resultType="java.util.Map">
+        select
+        (select should_pay  from tz_pay_fee where pay_month =#{month} and dept_id=#{deptId} and del_flag=0 ) as monthRes
+    </select>
+
+    <select id="queryPayFeePage" resultType="me.flyray.bsin.server.domain.TzPayFee">
+        SELECT tz_pay_fee.id,tz_pay_fee.dept_id,tz_pay_fee.dept_name,tz_pay_fee.pay_month,tz_pay_fee.status,tz_pay_fee.create_time,
+        count(tz_pay_fee_detail.id) as shouldPayNum,SUM(tz_pay_fee_detail.should_pay) as shouldPay,
+        count(tz_pay_fee_detail_log.id) as actuallyPayNum,COALESCE(SUM(tz_pay_fee_detail_log.should_pay),0) as actuallyPay FROM tz_pay_fee
+        LEFT JOIN tz_pay_fee_detail on tz_pay_fee.id = tz_pay_fee_detail.pay_fee_id and tz_pay_fee_detail.del_flag = 0 AND tz_pay_fee_detail.pay_month = tz_pay_fee.pay_month
+        LEFT JOIN tz_pay_fee_detail_log on tz_pay_fee_detail.id = tz_pay_fee_detail_log.pay_fee_detail_id and tz_pay_fee_detail_log.del_flag = 0 and tz_pay_fee_detail_log.order_status = 2 AND tz_pay_fee_detail_log.pay_month = tz_pay_fee.pay_month
+        ${ew.customSqlSegment}
+    </select>
+
+</mapper>

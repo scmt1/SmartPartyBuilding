@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="me.flyray.bsin.server.mapper.TDictDataMapper">
+
+  <resultMap id="tDictDataMap" type="me.flyray.bsin.server.domain.TDictData">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="create_by" jdbcType="INTEGER" property="createBy"/>
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    <result column="del_flag" jdbcType="INTEGER" property="delFlag"/>
+    <result column="update_by" jdbcType="INTEGER" property="updateBy"/>
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    <result column="description" jdbcType="VARCHAR" property="description"/>
+    <result column="dict_id" jdbcType="INTEGER" property="dictId"/>
+    <result column="sort_order" jdbcType="DECIMAL" property="sortOrder"/>
+    <result column="status" jdbcType="INTEGER" property="status"/>
+    <result column="title" jdbcType="VARCHAR" property="title"/>
+    <result column="value" jdbcType="VARCHAR" property="value"/>
+  </resultMap>
+
+  <select id="findByDictIdAndStatusOrderBySortOrder" resultMap="tDictDataMap">
+    select * from t_dict_data where status = 0
+    <if test="dictId != null and dictId != ''">
+      and  dict_id = #{dictId}
+    </if>
+  </select>
+  <delete id="removeByDictId">
+    delete from t_dict_data where dict_id = #{dictId}
+  </delete>
+</mapper>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>me.flyray.bsin</groupId>
+        <artifactId>bsin-paas-dependencies</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>me.flyray.bsin</groupId>
+    <artifactId>bsin-server-scaffold</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <modules>
+        <module>scaffold-facade</module>
+        <module>scaffold-server</module>
+    </modules>
+    <name>bsin-server-scaffold</name>
+    <description>bsin-paas平台：原子服务开发脚手架</description>
+
+    <properties>
+        <java.version>11</java.version>
+        <scaffold.version>1.0.0-SNAPSHOT</scaffold.version>
+        <bsin.paas.starter>1.0.0-SNAPSHOT</bsin.paas.starter>
+        <lombok.version>1.18.20</lombok.version>
+    </properties>
+
+    <dependencies>
+        <!--<dependency>
+            <groupId>me.flyray.bsin</groupId>
+            <artifactId>bsin-paas-starter</artifactId>
+            <version>${bsin.paas.starter}</version>
+        </dependency>-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alipay.sofa</groupId>
+            <artifactId>rpc-sofa-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>me.flyray.bsin</groupId>
+                <artifactId>scaffold-facade</artifactId>
+                <version>${scaffold.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+</project>

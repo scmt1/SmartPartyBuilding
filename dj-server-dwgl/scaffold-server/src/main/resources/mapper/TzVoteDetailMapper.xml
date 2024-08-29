@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yami.shop.dj.dao.TzVoteDetailMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="me.flyray.bsin.server.domain.TzVoteDetail">
+        <id column="id" property="id" />
+        <result column="vote_id" property="voteId" />
+        <result column="img_path" property="imgPath" />
+        <result column="name_item" property="nameItem" />
+        <result column="number_vote" property="numberVote" />
+        <result column="vote_by" property="voteBy" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, vote_id, img_path, name_item, number_vote, vote_by
+    </sql>
+
+</mapper>

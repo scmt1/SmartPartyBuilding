@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="me.flyray.bsin.server.mapper.TzStudyVideoMapper">
+
+    <select id="getStudyVideoByPage" resultType="me.flyray.bsin.server.domain.TzStudyVideo">
+        SELECT
+            tz_study_video.id,
+            tz_study_video.column_id,
+            tz_study_video.column_name,
+            tz_study_video.title,
+            tz_study_video.status,
+            tz_study_video.play_count,
+            tz_study_video.like_count,
+            tz_study_video.collect_count,
+            tz_study_video.create_by,
+            tz_study_video.create_time,
+            tz_study_video.post_time,
+            tz_study_video.process_time,
+            tz_study_video.update_time,
+            tz_study_video.update_by,
+            tz_study_video.hours,
+            tz_study_video.scores,
+            tz_study_video.summary,
+            tz_study_video.keyword,
+            tz_study_video.content,
+            tz_study_video.source,
+            tz_study_video.introduce,
+            tz_study_video.del_flag,
+            tz_study_video.dept_id,
+            tz_study_video.top,
+            tz_study_video.top_sort,
+            tz_study_video.show_home,
+            tz_study_video.show_home_sort,
+            tz_study_video.keynote_speaker,
+            tz_study_video.start_time,
+            tz_study_video.end_time,
+            tz_study_video.view_type,
+            tz_study_video.image_url,
+            tz_study_video.file_url,
+            tz_study_video.file_name,
+            tz_study_video.video_url,
+            tz_study_view.message_time
+        FROM
+            tz_study_video
+        LEFT JOIN tz_study_view on tz_study_view.study_id = tz_study_video.id
+        ${ew.customSqlSegment}
+    </select>
+</mapper>

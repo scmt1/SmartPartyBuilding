@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.flyray.bsin.server.mapper.TzTwoBestOneFirstTimeMapper">
+
+    <resultMap id="twoBestOneFirstTimePageData" type="me.flyray.bsin.server.domain.TzTwoBestOneFirstTime">
+        <id column="id" property="id"/>
+        <result column="up_start_time" property="upStartTime"/>
+        <result column="up_end_time" property="upEndTime"/>
+        <result column="status" property="status"/>
+        <result column="del_flag" property="delFlag"/>
+        <result column="dept_id" property="deptId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="max_parent_id" property="maxParentId"/>
+        <result column="title" property="title"/>
+        <result column="audit_start_time" property="auditStartTime"/>
+        <result column="audit_end_time" property="auditEndTime"/>
+        <result column="max_parent_id" property="maxParentId"/>
+        <result column="audit" property="audit"/>
+        <result column="auditing" property="auditing"/>
+        <result column="turnDown" property="turnDown"/>
+        <result column="pass" property="pass"/>
+    </resultMap>
+
+    <select id="getTwoBestOneFirstTimeByPage" resultMap="twoBestOneFirstTimePageData">
+        SELECT
+            tz_two_best_one_first_time.id,
+            tz_two_best_one_first_time.max_parent_id,
+            tz_two_best_one_first_time.audit_end_time,
+            tz_two_best_one_first_time.dept_id,
+            tz_two_best_one_first_time.update_time,
+            tz_two_best_one_first_time.del_flag,
+            tz_two_best_one_first_time.title,
+            tz_two_best_one_first_time.create_time,
+            tz_two_best_one_first_time.audit_start_time,
+            tz_two_best_one_first_time.up_start_time,
+            tz_two_best_one_first_time.up_end_time,
+            tz_two_best_one_first_time.status,
+            SUM(case when tz_two_best_one_first.status = 1 then 1 else 0 end) as audit,
+            SUM(case when tz_two_best_one_first.status in (2,4) then 1 else 0 end) as auditing,
+            SUM(case when tz_two_best_one_first.status in (3,5,7) then 1 else 0 end) as turnDown,
+            SUM(case when tz_two_best_one_first.status = 6 then 1 else 0 end) as pass
+        FROM
+            tz_two_best_one_first_time
+        LEFT JOIN tz_two_best_one_first on tz_two_best_one_first_time.id = tz_two_best_one_first.time_id
+        and tz_two_best_one_first.del_flag = 0 and tz_two_best_one_first.create_dept_id = #{deptId}
+        ${ew.customSqlSegment}
+    </select>
+</mapper>

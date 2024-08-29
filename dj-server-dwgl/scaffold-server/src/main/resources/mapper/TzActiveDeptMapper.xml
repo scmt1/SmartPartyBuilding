@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.flyray.bsin.server.mapper.TzActiveDeptMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="me.flyray.bsin.server.domain.TzActiveDept">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="dept_id" jdbcType="INTEGER" property="deptId" />
+        <result column="del_flag" jdbcType="INTEGER" property="delFlag" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="introduce" jdbcType="VARCHAR" property="introduce" />
+        <result column="square" jdbcType="DOUBLE" property="square" />
+        <result column="build_time" jdbcType="TIMESTAMP" property="buildTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, dept_id, del_flag, create_time, update_time, introduce, square
+    </sql>
+
+</mapper>

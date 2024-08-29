@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="me.flyray.bsin.server.mapper.jcxf.JcxfSysDeptMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="me.flyray.bsin.server.domain.jcxf.JcxfSysDept">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="parent_id" jdbcType="INTEGER" property="parentId"/>
+        <result column="parent_ids" jdbcType="VARCHAR" property="parentIds"/>
+        <result column="code" jdbcType="VARCHAR" property="code"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="dept_type" jdbcType="INTEGER" property="deptType"/>
+        <result column="finally_sort" jdbcType="INTEGER" property="finallySort"/>
+        <result column="grade" jdbcType="VARCHAR" property="grade"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="zip_code" jdbcType="VARCHAR" property="zipCode"/>
+        <result column="master" jdbcType="VARCHAR" property="master"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="fax" jdbcType="VARCHAR" property="fax"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="icon" jdbcType="VARCHAR" property="icon"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
+        <result column="del_flag" jdbcType="INTEGER" property="delFlag"/>
+        <result column="party_org_situation" jdbcType="INTEGER" property="partyOrgSituation"/>
+        <result column="party_org_contact" jdbcType="VARCHAR" property="partyOrgContact"/>
+        <result column="party_org_manager" jdbcType="VARCHAR" property="partyOrgManager"/>
+        <result column="unit_name" jdbcType="VARCHAR" property="unitName"/>
+        <result column="party_org_type" jdbcType="INTEGER" property="partyOrgType"/>
+        <result column="unit_org_situation" jdbcType="INTEGER" property="unitOrgSituation"/>
+        <result column="unit_code" jdbcType="VARCHAR" property="unitCode"/>
+        <result column="party_org_create_type" jdbcType="INTEGER" property="partyOrgCreateType"/>
+        <result column="approval_create_time" jdbcType="TIMESTAMP" property="approvalCreateTime"/>
+        <result column="longitude" jdbcType="DECIMAL" property="longitude"/>
+        <result column="latitude" jdbcType="DECIMAL" property="latitude"/>
+        <result column="dept_label" jdbcType="VARCHAR" property="deptLabel"/>
+        <result column="dept_photo" jdbcType="VARCHAR" property="deptPhoto"/>
+        <result column="dept_introduction" jdbcType="VARCHAR" property="deptIntroduction"/>
+        <result column="organization_type" jdbcType="INTEGER" property="organizationType"/>
+        <result column="demonstrative_school" jdbcType="INTEGER" property="demonstrativeSchool"/>
+        <result column="demonstrative_party_org" jdbcType="INTEGER" property="demonstrativePartyOrg"/>
+        <result column="area_id" jdbcType="VARCHAR" property="areaId"/>
+        <result column="org_code" jdbcType="VARCHAR" property="orgCode"/>
+        <result column="parent_org_code" jdbcType="VARCHAR" property="parentOrgCode"/>
+        <result column="sort" jdbcType="INTEGER" property="sort"/>
+        <result column="undo_flag" jdbcType="INTEGER" property="undoFlag"/>
+        <result column="undo_date" jdbcType="DATE" property="undoDate"/>
+        <result column="old_id" jdbcType="VARCHAR" property="oldId"/>
+        <result column="proxy_id" jdbcType="VARCHAR" property="proxyId"/>
+        <result column="py_name" jdbcType="VARCHAR" property="pyName"/>
+        <result column="merchant" jdbcType="VARCHAR" property="merchant"/>
+        <result column="merstatus" jdbcType="VARCHAR" property="merstatus"/>
+        <result column="veteran" jdbcType="VARCHAR" property="veteran"/>
+    </resultMap>
+
+    <resultMap id="BaseResultMap2" type="me.flyray.bsin.server.domain.jcxf.JcxfSysDept">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="parent_id" jdbcType="INTEGER" property="parentId"/>
+        <result column="parent_ids" jdbcType="VARCHAR" property="parentIds"/>
+        <result column="code" jdbcType="VARCHAR" property="code"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="dept_type" jdbcType="INTEGER" property="deptType"/>
+        <result column="finally_sort" jdbcType="INTEGER" property="finallySort"/>
+        <result column="grade" jdbcType="VARCHAR" property="grade"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="zip_code" jdbcType="VARCHAR" property="zipCode"/>
+        <result column="master" jdbcType="VARCHAR" property="master"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="fax" jdbcType="VARCHAR" property="fax"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="icon" jdbcType="VARCHAR" property="icon"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
+        <result column="del_flag" jdbcType="INTEGER" property="delFlag"/>
+        <result column="party_org_situation" jdbcType="INTEGER" property="partyOrgSituation"/>
+        <result column="party_org_contact" jdbcType="VARCHAR" property="partyOrgContact"/>
+        <result column="party_org_manager" jdbcType="VARCHAR" property="partyOrgManager"/>
+        <result column="unit_name" jdbcType="VARCHAR" property="unitName"/>
+        <result column="party_org_type" jdbcType="INTEGER" property="partyOrgType"/>
+        <result column="unit_org_situation" jdbcType="INTEGER" property="unitOrgSituation"/>
+        <result column="unit_code" jdbcType="VARCHAR" property="unitCode"/>
+        <result column="party_org_create_type" jdbcType="INTEGER" property="partyOrgCreateType"/>
+        <result column="approval_create_time" jdbcType="TIMESTAMP" property="approvalCreateTime"/>
+        <result column="longitude" jdbcType="DECIMAL" property="longitude"/>
+        <result column="latitude" jdbcType="DECIMAL" property="latitude"/>
+        <result column="dept_label" jdbcType="VARCHAR" property="deptLabel"/>
+        <result column="dept_photo" jdbcType="VARCHAR" property="deptPhoto"/>
+        <result column="dept_introduction" jdbcType="VARCHAR" property="deptIntroduction"/>
+        <result column="organization_type" jdbcType="INTEGER" property="organizationType"/>
+        <result column="demonstrative_school" jdbcType="INTEGER" property="demonstrativeSchool"/>
+        <result column="demonstrative_party_org" jdbcType="INTEGER" property="demonstrativePartyOrg"/>
+        <result column="area_id" jdbcType="VARCHAR" property="areaId"/>
+        <result column="org_code" jdbcType="VARCHAR" property="orgCode"/>
+        <result column="parent_org_code" jdbcType="VARCHAR" property="parentOrgCode"/>
+        <result column="sort" jdbcType="INTEGER" property="sort"/>
+        <result column="undo_flag" jdbcType="INTEGER" property="undoFlag"/>
+        <result column="undo_date" jdbcType="DATE" property="undoDate"/>
+        <result column="old_id" jdbcType="VARCHAR" property="oldId"/>
+        <result column="proxy_id" jdbcType="VARCHAR" property="proxyId"/>
+        <result column="py_name" jdbcType="VARCHAR" property="pyName"/>
+        <result column="merchant" jdbcType="VARCHAR" property="merchant"/>
+        <result column="merstatus" jdbcType="VARCHAR" property="merstatus"/>
+        <result column="veteran" jdbcType="VARCHAR" property="veteran"/>
+        <result column="isLeaf" jdbcType="BOOLEAN" property="isLeaf"/>
+    </resultMap>
+
+    <sql id="baseColumnList">
+        id, parent_id,parent_ids,code, name, type, dept_type, finally_sort,grade,address,zip_code,master,phone,fax,
+        email,icon,create_by,create_date,update_by,update_date,del_flag,party_org_situation,party_org_contact,
+        party_org_manager,unit_name,party_org_type,unit_org_situation,unit_code,party_org_create_type,approval_create_time,
+        longitude,latitude,dept_label,dept_photo,dept_introduction,organization_type,demonstrative_school,demonstrative_party_org,
+        area_id,org_code,parent_org_code,sort,undo_flag,undo_date,old_id,proxy_id,py_name,merchant,merstatus,veteran
+    </sql>
+
+    <select id="getNameList" resultMap="BaseResultMap">
+        select id, parent_id, name, type from sys_dept
+        <where>
+            del_flag = 0     and ( id = #{id}  or parent_ids LIKE concat( '%,', #{id}, ',%' ) )
+        </where>
+    </select>
+
+    <select id="getBaseInfoById" resultType="me.flyray.bsin.server.domain.jcxf.JcxfSysDept">
+        select id,name,parent_id,type from sys_dept
+        <where>
+            del_flag = 0
+            <if test="id !=null and id != ''">
+                and parent_ids like '%,${id},%' or id = #{id}
+            </if>
+        </where>
+    </select>
+
+    <select id="getParentIds" resultType="java.lang.String">
+        select DISTINCT(de.parent_ids) from party_member me left join sys_dept de on me.dept_id = de.id
+        <where>
+            <if test="deptId !=null and deptId!=''">
+                me.dept_id=#{deptId}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectChildrenIdsById" resultType="java.lang.Long">
+        select id from sys_dept
+        <where>
+            parent_ids LIKE concat( '%,', #{id}, ',%' ) and del_flag = 0
+        </where>
+    </select>
+
+    <select id="selectChildrenIdsByIdAndOther" resultType="java.lang.Long">
+        select id from sys_dept
+        <where>
+            parent_ids LIKE concat( '%,', #{id}, ',%' ) and del_flag = 0
+            <if test="veteran !=null and veteran != ''">
+                and veteran = #{veteran}
+            </if>
+            <if test="organizationType !=null and organizationType != ''">
+                and organization_type = #{organizationType}
+            </if>
+    </where>
+    </select>
+
+    <select id="selectChildrenInfoById" resultType="me.flyray.bsin.server.domain.jcxf.JcxfSysDept">
+        select id,name from sys_dept
+        <where>
+            parent_ids LIKE concat( '%,', #{id}, ',%' ) and del_flag = 0
+        </where>
+    </select>
+
+
+    <select id="getParentDept" resultType="java.lang.String">
+        select name from sys_dept where id = #{parentId} and del_flag = 0
+    </select>
+
+    <select id="getAllName" resultType="me.flyray.bsin.server.domain.jcxf.JcxfSysDept">
+        select id,name,parent_id,type from sys_dept
+        where  del_flag = 0
+    </select>
+    <select id="getParentDeptListById" resultMap="BaseResultMap2">
+        select a.id, a.parent_id, a.name, a.type,
+               (case when (select count(*) as num from sys_dept b where b.del_flag = 0  and b.parent_id = a.id) > 0 then false else true end) as isLeaf
+               from sys_dept a where a.del_flag = 0 and a.parent_id = #{id} order by name asc
+    </select>
+    <select id="queryIsLeafById" resultType="java.lang.Integer">
+        select count(*) from sys_dept
+        <where>
+            del_flag = 0    and ( parent_ids LIKE concat( '%,', #{id}, ',%' ) )
+        </where>
+    </select>
+    <select id="getCountById" resultType="me.flyray.bsin.server.domain.jcxf.JcxfSysDept">
+        select id,name,parent_id,type from sys_dept d
+        <where>
+            d.del_flag = 0
+            <if test="type !=null and type != ''">
+                and d.type = #{type}
+            </if>
+            <if test="id !=null and id != ''">
+                and d.parent_ids like '%${id}%' or id = #{id}
+            </if>
+        </where>
+    </select>
+    <select id="selectChildrenIdsByIdAndType" resultType="java.lang.Integer">
+        select id from sys_dept tz
+        <where>
+            tz.parent_ids LIKE concat( '%,', #{id}, ',%' ) and tz.del_flag = 0
+            <if test="type!=null and type!=''">
+              and  tz.type = #{type}
+            </if>
+        </where>
+    </select>
+
+    <select id="getChildrenIdsByVeteran" resultType="java.lang.Integer">
+        select id from sys_dept
+        <where>
+            parent_ids LIKE concat( '%,', #{id}, ',%' ) and del_flag = 0
+            <if test="veteran != null and veteran != ''">
+                and veteran = #{veteran}
+            </if>
+            <if test="typeList != null and typeList.size > 0">
+                and type in
+                <foreach collection="typeList" item="item" open="(" separator="," close=")">
+                 #{item}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
+    <select id="getNextFinallySort" resultType="Integer">
+        select max(ifnull(finally_sort, 500)) + 10 as nextSort from sys_dept where del_flag=0
+    </select>
+
+    <select id="getJcxfDeptByPage" resultType="me.flyray.bsin.server.domain.jcxf.JcxfSysDept">
+        select
+            t.*,
+            b.this_session_start_time as this_change_time,
+            STR_TO_DATE(b.this_session_finish_time, '%Y-%m-%d') as this_finish_time
+        FROM
+            sys_dept t
+            LEFT JOIN branch_reelection b on b.dept_id = t.id and b.del_flag = 0
+                     and b.this_session_start_time = (select max(c.this_session_start_time) from branch_reelection c where c.dept_id = b.dept_id)
+        ${ew.customSqlSegment}
+    </select>
+
+    <select id="getJcxfDeptLowerLeveByPage" resultType="me.flyray.bsin.server.domain.jcxf.JcxfSysDept">
+        select
+            t.*
+        FROM
+            sys_dept t
+        ${ew.customSqlSegment}
+    </select>
+
+    <resultMap id="childDeptGroup" type="me.flyray.bsin.server.domain.jcxf.JcxfSysDeptChildGroup">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <collection property="childIds" ofType="Integer">
+            <id column="r_id"/>
+        </collection>
+    </resultMap>
+    <select id="getChildDeptMap" resultMap="childDeptGroup">
+        select t.id, t.name, any_value(d.id) as r_id from sys_dept t
+        left join sys_dept d on d.del_flag = 0 and d.parent_ids like concat( '%,', t.id, ',%' )
+        where t.del_flag = 0 and t.parent_id = #{id} GROUP BY t.id
+        <if test="pageNum != null and pageNum != ''">
+            <bind name="pageNow" value="(pageNum-1)*pageSize"></bind>
+        </if>
+    </select>
+    <select id="getDeptParentIdList" resultType="java.lang.String">
+        select parent_ids from (
+                                   select
+                                       @id as  id ,
+                                       (
+                                           SELECT
+                                               @id :=max(parent_id)
+                                   FROM
+                                       sys_dept a
+                                   WHERE
+                                       a.id=@id
+                               ) AS parent_ids,
+            @l := @l + 1 AS `level`
+        FROM
+            sys_dept dw_region,
+            (SELECT @id := (#{id}), @l := 0) b
+            )a where parent_ids is not null  order by `level` desc
+    </select>
+
+    <insert id="addPaasDept">
+        INSERT INTO sk_paas_upms.sys_dept ( `id`, `parent_id`, `name`, `type`, `create_by`, `create_time`)
+            VALUES (#{jcxfSysDept.id},#{jcxfSysDept.parentId},#{jcxfSysDept.name},
+             #{jcxfSysDept.type},#{jcxfSysDept.createBy},#{jcxfSysDept.createTime})
+    </insert>
+
+    <insert id="addPassSysOrg">
+        INSERT INTO sk_paas_upms.sys_org ( `org_id`, `org_code`, `org_name`, `parent_id`,`tenant_id`,`create_time`)
+            VALUES (#{sysOrg.orgId},#{sysOrg.orgCode},#{sysOrg.orgName},
+             #{sysOrg.parentId},#{sysOrg.tenantId},#{sysOrg.createTime})
+    </insert>
+
+    <update id="updatePassDept">
+        update sk_paas_upms.sys_dept set `name` = #{jcxfSysDept.name},`type` = #{jcxfSysDept.type},`parent_id` = #{jcxfSysDept.parentId}
+        where id = #{jcxfSysDept.id}
+    </update>
+
+    <update id="updatePassSysOrg">
+        update sk_paas_upms.sys_org set `org_name` = #{sysOrg.orgName},`tenant_id` = #{sysOrg.tenantId},`parent_id` = #{sysOrg.parentId}
+        where org_id = #{sysOrg.orgId}
+    </update>
+    <select id="getOrgInfoByOrgId" resultType="me.flyray.bsin.server.domain.SysOrg">
+        select * from sk_paas_upms.sys_org where org_id = #{orgId}
+    </select>
+</mapper>

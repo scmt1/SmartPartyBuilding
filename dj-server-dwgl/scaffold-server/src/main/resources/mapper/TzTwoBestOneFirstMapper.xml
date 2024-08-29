@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.flyray.bsin.server.mapper.TzTwoBestOneFirstMapper">
+
+    <resultMap id="twoBestOneFirstPageData" type="me.flyray.bsin.server.domain.TzTwoBestOneFirst">
+        <id column="id" property="id"/>
+        <result column="create_time" property="createTime"/>
+        <result column="status" property="status"/>
+        <result column="del_flag" property="delFlag"/>
+        <result column="create_dept_id" property="createDeptId"/>
+        <result column="party_member_id" property="partyMemberId"/>
+        <result column="table_type" property="tableType"/>
+        <result column="base_condition" property="baseCondition"/>
+        <result column="commend_condition" property="commendCondition"/>
+        <result column="main_deed" property="mainDeed"/>
+        <result column="resume" property="resume"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="avatar" property="avatar"/>
+        <result column="party_member_info" property="partyMemberInfo"/>
+        <result column="dept_info" property="deptInfo"/>
+        <result column="commend_type" property="commendType"/>
+        <result column="time_id" property="timeId"/>
+        <association property="timeInfo" javaType="me.flyray.bsin.server.domain.TzTwoBestOneFirstTime">
+            <result column="title" property="title"/>
+        </association>
+    </resultMap>
+
+    <select id="getTzTwoBestOneFirstByPage" resultMap="twoBestOneFirstPageData">
+        SELECT
+            tz_two_best_one_first.id,
+            tz_two_best_one_first.resume,
+            tz_two_best_one_first.create_dept_id,
+            tz_two_best_one_first.base_condition,
+            tz_two_best_one_first.time_id,
+            tz_two_best_one_first.party_member_id,
+            tz_two_best_one_first.commend_condition,
+            tz_two_best_one_first.commend_type,
+            tz_two_best_one_first.update_time,
+            tz_two_best_one_first.avatar,
+            tz_two_best_one_first.del_flag,
+            tz_two_best_one_first.main_deed,
+            tz_two_best_one_first.table_type,
+            tz_two_best_one_first.create_time,
+            tz_two_best_one_first.party_member_info,
+            tz_two_best_one_first.dept_info,
+            tz_two_best_one_first.status,
+            tz_two_best_one_first_time.title
+        FROM
+            tz_two_best_one_first
+        LEFT JOIN tz_two_best_one_first_time on tz_two_best_one_first_time.id = tz_two_best_one_first.time_id
+        ${ew.customSqlSegment}
+    </select>
+</mapper>

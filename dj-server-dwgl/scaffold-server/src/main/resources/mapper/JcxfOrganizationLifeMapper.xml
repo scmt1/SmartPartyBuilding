@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.flyray.bsin.server.mapper.jcxf.JcxfOrganizationLifeMapper">
+
+    <select id="queryMeetingClass" resultType="java.util.Map">
+        SELECT
+        sum(case when MONTH (t.start_time) = 1 then 1 else 0 end ) as january,
+        sum(case when MONTH (t.start_time) = 2 then 1 else 0 end ) as february,
+        sum(case when MONTH (t.start_time) = 3 then 1 else 0 end ) as march,
+        sum(case when MONTH (t.start_time) = 4 then 1 else 0 end ) as april,
+        sum(case when MONTH (t.start_time) = 5 then 1 else 0 end ) as may,
+        sum(case when MONTH (t.start_time) = 6 then 1 else 0 end ) as june,
+        sum(case when MONTH (t.start_time) = 7 then 1 else 0 end ) as july,
+        sum(case when MONTH (t.start_time) = 8 then 1 else 0 end ) as august,
+        sum(case when MONTH (t.start_time) = 9 then 1 else 0 end ) as september,
+        sum(case when MONTH (t.start_time) = 10 then 1 else 0 end ) as october,
+        sum(case when MONTH (t.start_time) = 11 then 1 else 0 end ) as november,
+        sum(case when MONTH (t.start_time) = 12 then 1 else 0 end ) as december
+        FROM
+        `party_meeting` t
+        <where>
+            t.meeting_type = "1" and t.del_flag=0
+            <if test="ids!=null and ids.size > 0 ">
+                and t.dept_id in
+                <foreach collection="ids" item="id" index="index" open="(" separator="," close=")">
+                    #{id}
+                </foreach>
+            </if>
+            <if test="year!=null and year!= ''">
+                and YEAR ( t.start_time ) = #{year}
+            </if>
+        </where>
+    </select>
+    <select id="queryOrganizationLife" resultType="java.lang.Integer">
+        SELECT
+        count(1)
+        FROM
+        `party_meeting` t
+        <where>
+            t.del_flag = 0 and t.meeting_type = #{type}
+            <if test="ids!=null and ids.size > 0 ">
+                and t.dept_id in
+                <foreach collection="ids" item="id" index="index" open="(" separator="," close=")">
+                    #{id}
+                </foreach>
+            </if>
+            <if test="year!=null and year!= ''">
+                and YEAR ( t.start_time ) = #{year}
+            </if>
+        </where>
+    </select>
+    <select id="queryMeetingClass3" resultType="java.util.Map">
+        SELECT
+        YEAR ( t.start_time ) as year,
+        sum(case when MONTH (t.start_time) = 1 then 1 else 0 end ) as january,
+        sum(case when MONTH (t.start_time) = 2 then 1 else 0 end ) as february,
+        sum(case when MONTH (t.start_time) = 2 then 1 else 0 end ) as march,
+        sum(case when MONTH (t.start_time) = 2 then 1 else 0 end ) as april,
+        sum(case when MONTH (t.start_time) = 2 then 1 else 0 end ) as may,
+        sum(case when MONTH (t.start_time) = 2 then 1 else 0 end ) as june,
+        sum(case when MONTH (t.start_time) = 2 then 1 else 0 end ) as july,
+        sum(case when MONTH (t.start_time) = 2 then 1 else 0 end ) as august,
+        sum(case when MONTH (t.start_time) = 2 then 1 else 0 end ) as september,
+        sum(case when MONTH (t.start_time) = 2 then 1 else 0 end ) as october,
+        sum(case when MONTH (t.start_time) = 2 then 1 else 0 end ) as november,
+        sum(case when MONTH (t.start_time) = 2 then 1 else 0 end ) as december
+        FROM
+        `party_meeting` t
+        <where>
+            <if test="id!=null and id!= ''">
+                t.dept_id = #{id}
+            </if>
+        </where>
+        group by YEAR ( t.start_time ) LIMIT 0,10
+    </select>
+    <select id="queryMeetingClass2" resultType="java.util.Map">
+     	select
+        (select count(1)  from party_meeting where MONTH (start_time) = 1  ) as january,
+        (select count(1)  from party_meeting where MONTH (start_time) = 2  ) as february,
+        (select count(1)  from party_meeting where MONTH (start_time) = 3  ) as march,
+        (select count(1)  from party_meeting where MONTH (start_time) = 4  ) as april,
+        (select count(1)  from party_meeting where MONTH (start_time) = 5  ) as may,
+        (select count(1)  from party_meeting where MONTH (start_time) = 6  ) as june,
+        (select count(1)  from party_meeting where MONTH (start_time) = 7  ) as july,
+        (select count(1)  from party_meeting where MONTH (start_time) = 8  ) as august,
+        (select count(1)  from party_meeting where MONTH (start_time) = 9  ) as september,
+        (select count(1)  from party_meeting where MONTH (start_time) = 10 ) as october,
+        (select count(1)  from party_meeting where MONTH (start_time) = 11 ) as november,
+        (select count(1)  from party_meeting where MONTH (start_time) = 12 ) as december
+        from  party_meeting
+
+				where YEAR( start_time ) = #{year} and  dept_id= #{Integer}
+    </select>
+    <select id="queryMeetingClassType" resultType="java.util.Map">
+        SELECT sum(case when class_type is null or class_type = '' or class_type = 1 then 1 else 0 end ) as zhibudahui,
+        sum(case when class_type = 2 then 1 else 0 end ) as zhiweihui,
+        sum(case when class_type = 3 then 1 else 0 end ) as dangxiaozu,
+        sum(case when class_type = 4 then 1 else 0 end ) as dangke
+        FROM party_meeting
+        WHERE YEAR(start_time) = YEAR(STR_TO_DATE(#{date}, '%Y-%m-%d'))
+        AND MONTH(start_time) =  MONTH(STR_TO_DATE(#{date}, '%Y-%m-%d'))
+        and dept_id = #{deptId} and meeting_status='3' and meeting_type = '1' and del_flag = 0
+    </select>
+
+    <!--<select id="getLifeCountToRankQxAndOther" resultType="java.util.Map">
+        select count(DISTINCT dept_id) as num
+                from party_meeting
+       <where>
+           del_flag = 0 and meeting_type = '1' and meeting_status = '3'
+           <if test="startTime != null and startTime != '' ">
+                and #{startTime} &lt;= end_time
+           </if>
+           <if test="endTime != null and endTime != '' ">
+                and  #{endTime} &gt;= end_time
+           </if>
+           and dept_id in
+           <foreach collection="deptIds" index="index" item="item" open="(" separator="," close=")">
+               #{item}
+           </foreach>
+       </where>
+    </select>-->
+
+    <select id="getLifeCountToRankQxAndOther" resultType="Integer">
+        select count(*) from (
+            select table1.dept_id from (
+                select DISTINCT ANY_VALUE(dept_id) as dept_id, ANY_VALUE(DATE_FORMAT(start_time, '%Y-%m' )) as time from party_meeting
+                <where>
+                    <if test="startTime != null and startTime != '' ">
+                        and start_time >= #{startTime}
+                    </if>
+                    <if test="endTime != null and endTime != '' ">
+                        and  #{endTime} &gt;= start_time
+                    </if>
+                    and dept_id in
+                    <foreach collection="deptIds" index="index" item="item" open="(" separator="," close=")">
+                        #{item}
+                    </foreach>
+                </where>
+                and del_flag = 0 and meeting_type = '1' and meeting_status = '3'
+                group by dept_id, DATE_FORMAT(start_time, '%Y-%m' )
+            ) as table1 GROUP BY table1.dept_id HAVING count(table1.dept_id) >= #{shouldCount}
+        ) as table2
+    </select>
+
+    <select id="getLifeCountToRankOfMeetingType" resultType="java.util.Map">
+        select count(*) as num from party_meeting
+        <where>
+            del_flag = 0 and meeting_type = #{meetingType} and meeting_status = '3'
+            <if test="startTime != null and startTime != '' ">
+                and #{startTime} &lt;= start_time
+            </if>
+            <if test="endTime != null and endTime != '' ">
+                and #{endTime} &gt;= start_time
+            </if>
+            and dept_id in
+            <foreach collection="deptIds" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </where>
+        GROUP BY dept_id
+    </select>
+
+    <select id="queryShouldMeetingClassTypeByThisMonth" resultType="java.util.Map">
+        SELECT sum(case when class_type = 1 then 1 else 0 end ) as zhibudahui,
+        sum(case when class_type = 2 then 1 else 0 end ) as zhiweihui,
+        sum(case when class_type = 3 then 1 else 0 end ) as dangxiaozu,
+        sum(case when class_type = 4 then 1 else 0 end ) as dangke
+        FROM party_meeting
+        WHERE YEAR(start_time) = YEAR(STR_TO_DATE(#{date}, '%Y-%m-%d'))
+        AND MONTH(start_time) =  MONTH(STR_TO_DATE(#{date}, '%Y-%m-%d'))
+        and dept_id = #{deptId} and meeting_status in ('1','2','3') and meeting_type = '1' and del_flag = 0
+    </select>
+
+    <select id="queryActuallyMeetingClassTypeByThisMonth" resultType="java.util.Map">
+        SELECT sum(case when class_type is null or class_type = '' or class_type = 1 then 1 else 0 end ) as zhibudahui,
+        sum(case when class_type = 2 then 1 else 0 end ) as zhiweihui,
+        sum(case when class_type = 3 then 1 else 0 end ) as dangxiaozu,
+        sum(case when class_type = 4 then 1 else 0 end ) as dangke
+        FROM party_meeting
+        WHERE YEAR(start_time) = YEAR(STR_TO_DATE(#{date}, '%Y-%m-%d'))
+        AND MONTH(start_time) =  MONTH(STR_TO_DATE(#{date}, '%Y-%m-%d'))
+        and dept_id = #{deptId} and meeting_status = '3' and meeting_type = '1' and del_flag = 0
+    </select>
+
+
+    <select id="selectAllMeetingUserByDeptId" resultType="me.flyray.bsin.server.domain.jcxf.JcxfPartyMember">
+        SELECT
+        ANY_VALUE(p.id) as id,
+        ANY_VALUE(p.real_name) as real_name,
+        ANY_VALUE(p.is_flow) as is_flow,
+        ANY_VALUE(d.name) AS dept_name,
+        ANY_VALUE(sd.detail_name) AS position_name
+        FROM
+        party_member p
+        LEFT JOIN sys_dept d ON p.dept_id = d.id
+        LEFT JOIN sys_dictionary sd ON p.position = sd.detail AND sd.code = 'position'
+        WHERE
+        1 = 1
+        AND p.dept_id = #{deptId} and p.del_flag = 0 and p.party_state != 4 and p.is_lost != 1
+        <if test="meetingType != null and meetingType == 2">
+            AND p.position != 99
+        </if>
+        <if test="isFlow != null and isFlow != ''">
+            AND p.is_flow != 1 AND p.is_flow IS NOT NULL
+        </if>
+        GROUP BY p.id
+    </select>
+
+
+    <select id="selectEndMeetingUserByDeptId" resultType="me.flyray.bsin.server.domain.jcxf.JcxfMeetingPojoUser">
+        SELECT
+        ANY_VALUE(p.id) as id,
+        ANY_VALUE(p.real_name) as partyName,
+        ANY_VALUE(p.avatar) as avatar ,
+        ANY_VALUE((
+            SELECT `name` FROM sys_dept d WHERE p.dept_id = d.id and d.del_flag=0
+        )) AS deptName,
+        ANY_VALUE(IFNULL(
+            (
+                SELECT au.user_status FROM party_meeting_user au WHERE p.id = au.user_id and au.del_flag=0 AND au.meeting_id = #{meetingId}
+            ), 0
+        )) AS leaveStatus,
+        ANY_VALUE(IFNULL(
+            (
+                SELECT au.user_status FROM party_meeting_user au WHERE p.id = au.user_id and au.del_flag=0 AND au.meeting_id = #{meetingId}
+            ),6
+        )) AS status,
+        ANY_VALUE(IFNULL(
+            (
+                SELECT au.checkin_status FROM party_meeting_user au WHERE p.id = au.user_id and au.del_flag=0 AND au.meeting_id = #{meetingId}
+            ), 0
+        )) AS signIn,
+        ANY_VALUE(p.is_flow) as isFolw,
+        ANY_VALUE(p.phone) as phone,
+        ANY_VALUE(IFNULL(p.position, 99)) as `position`,
+        ANY_VALUE(IFNULL(
+            (
+                SELECT d.detail_name FROM sys_dictionary d WHERE d.detail = p.position AND d.`code` = 'position'
+            ), '无'
+        )) AS positionName
+        FROM
+        party_member p LEFT JOIN party_meeting_user au on p.id = au.user_id
+        WHERE
+        1 = 1
+        AND au.meeting_id = #{meetingId} and p.del_flag=0 and au.del_flag=0
+        <if test="meetingType != null and meetingType == 2">
+            AND p.position != 99
+        </if>
+        GROUP BY p.id
+    </select>
+
+
+    <select id="selectEndMeetingFlowUserByDeptId" resultType="me.flyray.bsin.server.domain.jcxf.JcxfMeetingPojoUser">
+        <![CDATA[
+
+        SELECT
+            ANY_VALUE(p.id) as id,
+            ANY_VALUE(p.real_name) as partyName,
+            ANY_VALUE(p.avatar) as avatar ,
+            ANY_VALUE((
+                SELECT
+                    `name`
+                FROM
+                    sys_dept d
+                WHERE
+                    p.dept_id = d.id and d.del_flag=0
+            )) AS deptName,
+            ANY_VALUE(IFNULL(
+                    (
+                        SELECT
+                            au.user_status
+                        FROM
+                            party_meeting_user au
+                        WHERE
+                            p.id = au.user_id and au.del_flag=0
+                          AND au.meeting_id = #{meetingId}
+                    ),
+                    0
+                )) AS leaveStatus,
+            ANY_VALUE(au.user_status) as user_status,
+            ANY_VALUE(p.is_flow) as isFlow,
+            ANY_VALUE(p.phone) as phone,
+            ANY_VALUE(IFNULL(p.position, 99)) as positon,
+            ANY_VALUE(IFNULL(
+                    (
+                        SELECT
+                            d.detail_name
+                        FROM
+                            sys_dictionary d
+                        WHERE
+                            d.detail = p.position and d.del_flag=0
+                          AND d.`code` = 'position'
+                    ),
+                    '无'
+                )) AS positionName
+        FROM
+            party_member p LEFT JOIN party_meeting_user au on p.id = au.user_id
+        WHERE
+            1 = 1 and p.del_flag=0 and au.del_flag=0
+          AND au.meeting_id = #{meetingId}  and p.is_flow  = 1
+        GROUP BY p.id
+
+        ]]>
+    </select>
+
+    <select id="getMeetingCountByDeptId" resultType="me.flyray.bsin.server.domain.jcxf.JcxfOrganizationLife">
+        SELECT
+            count( CASE WHEN class_type = 1 THEN 1 END) AS zbdhCount,
+            count( CASE WHEN class_type = 2 THEN 1 END) AS zwhyCount,
+            count( CASE WHEN class_type = 2 THEN 1 END) AS dxzhCount,
+            count( CASE WHEN class_type = 2 THEN 1 END) AS dkCount
+        FROM
+            party_meeting
+        WHERE
+            meeting_type = #{meetingType}
+        <if test="deptIds != null and deptIds.size() != 0">
+            AND dept_id IN
+            <foreach collection="deptIds" item="deptId" separator="," open="(" close=")">
+                #{deptId}
+            </foreach>
+        </if>
+    </select>
+
+</mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="me.flyray.bsin.server.mapper.BsinSysTenantMapper">
+
+  <resultMap id="bsinSysTenant" type="me.flyray.bsin.server.domain.bsin.BsinSysTenant">
+    <id column="tenant_id" jdbcType="VARCHAR" property="tenantId" />
+    <result column="status" jdbcType="INTEGER" property="status"/>
+    <result column="mch_no" jdbcType="VARCHAR" property="mchNo"/>
+    <result column="mch_app_id" jdbcType="VARCHAR" property="mchAppId"/>
+    <result column="api_key" jdbcType="VARCHAR" property="apiKey"/>
+  </resultMap>
+
+  <select id="getSysTenantInfo" resultMap="bsinSysTenant">
+    select tenant_id,status,mch_no,mch_app_id,api_key
+    from sys_tenant
+    where  del_flag = 0 and tenant_id=#{tenantId}
+  </select>
+
+</mapper>

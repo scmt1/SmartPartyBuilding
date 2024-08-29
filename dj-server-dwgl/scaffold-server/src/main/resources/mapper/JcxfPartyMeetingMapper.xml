@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.flyray.bsin.server.mapper.jcxf.JcxfPartyMeetingMapper">
+
+    <select id="getMeetingByPartyMemberId" resultType="me.flyray.bsin.server.domain.jcxf.JcxfPartyMeeting">
+        select * from party_meeting
+        left join party_meeting_user on party_meeting.id = party_meeting_user.meeting_id
+        where party_meeting_user.user_id = #{partyMemberId}
+        and party_meeting_user.del_flag = 0
+        order by party_meeting_user.create_date desc
+    </select>
+
+</mapper>

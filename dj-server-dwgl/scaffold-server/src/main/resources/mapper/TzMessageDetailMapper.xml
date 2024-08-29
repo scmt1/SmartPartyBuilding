@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.flyray.bsin.server.mapper.TzMessageDetailMapper">
+
+
+    <select id="countByPhone" resultType="java.lang.Integer">
+        SELECT COUNT(DISTINCT phone)
+        FROM tz_message_detail where tenant_id = #{tenantId}
+    </select>
+    <select id="countByPhoneToday" resultType="java.lang.Integer">
+         SELECT COUNT(DISTINCT phone)
+        FROM tz_message_detail WHERE DATE(post_time) = CURDATE() and tenant_id = #{tenantId}
+    </select>
+
+    <select id="recentlySendCount" resultType="java.util.Map">
+        select count(*) as num, DATE_FORMAT(post_time,'%Y-%m-%d') as time from tz_message_detail
+      <where>
+           <if test="startTime != null and startTime!= ''">
+              and post_time >= #{startTime}
+           </if>
+          <if test="endTime != null and endTime!= ''">
+              and  #{endTime} >= post_time
+          </if>
+          <if test="tenantId != null and tenantId != ''">
+              and tenant_id = #{tenantId}
+          </if>
+      </where>
+        group by DATE_FORMAT(post_time,'%Y-%m-%d');
+    </select>
+
+    <select id="recentlySendCountBySendStatus" resultType="me.flyray.bsin.server.domain.SendRateDto">
+        select sum(case when send_status = '1' then 1 else 0 end ) as success,
+        sum(case when send_status != '1' then 1 else 0 end ) as fail,
+            DATE_FORMAT(post_time,'%Y-%m-%d') as time from tz_message_detail
+        <where>
+            <if test="startTime != null and startTime!= ''">
+                and post_time >= #{startTime}
+            </if>
+            <if test="endTime != null and endTime!= ''">
+                and  #{endTime} >= post_time
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+        </where>
+        group by DATE_FORMAT(post_time,'%Y-%m-%d') order by DATE_FORMAT(post_time,'%Y-%m-%d')
+    </select>
+
+</mapper>

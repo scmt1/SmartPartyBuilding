@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="me.flyray.bsin.server.mapper.jcxf.JcxfPartyFloatingMemberMapper">
+
+  <select id="getPartyFloatingMemberByPage" resultType="me.flyray.bsin.server.domain.jcxf.JcxfPartyFloatingMember">
+      SELECT
+          party_floating_member.id,
+          party_floating_member.update_date,
+          party_floating_member.flow_target_dept,
+          party_floating_member.city_longitude,
+          party_floating_member.del_flag,
+          party_floating_member.floating_back,
+          party_floating_member.floating_city,
+          party_floating_member.city_latitude,
+          party_floating_member.floating_date,
+          party_floating_member.update_by,
+          party_floating_member.national,
+          party_floating_member.working,
+          party_floating_member.floating_status,
+          party_floating_member.floating_longitude,
+          party_floating_member.party_id,
+          party_floating_member.create_date,
+          party_floating_member.sex,
+          party_floating_member.floating_type,
+          party_floating_member.dept_id,
+          party_floating_member.floating_place,
+          party_floating_member.out_type,
+          party_floating_member.real_name,
+          party_floating_member.create_by,
+          party_floating_member.phone,
+          party_floating_member.idcard,
+          party_floating_member.floating_province,
+          party_floating_member.family_sort,
+          party_floating_member.floating_latitude,
+          sys_dept.name as deptName
+      FROM
+          party_floating_member
+      LEFT JOIN sys_dept on sys_dept.id = party_floating_member.dept_id
+      ${ew.customSqlSegment}
+  </select>
+
+    <select id="getPartyFloatingListByPartyMemberId" resultType="me.flyray.bsin.server.domain.jcxf.JcxfPartyFloatingMember">
+      SELECT
+          party_floating_member.id,
+          party_floating_member.update_date,
+          party_floating_member.flow_target_dept,
+          party_floating_member.city_longitude,
+          party_floating_member.del_flag,
+          party_floating_member.floating_back,
+          party_floating_member.floating_city,
+          party_floating_member.city_latitude,
+          party_floating_member.floating_date,
+          party_floating_member.update_by,
+          party_floating_member.national,
+          party_floating_member.working,
+          party_floating_member.floating_status,
+          party_floating_member.floating_longitude,
+          party_floating_member.party_id,
+          party_floating_member.create_date,
+          party_floating_member.sex,
+          party_floating_member.floating_type,
+          party_floating_member.dept_id,
+          party_floating_member.floating_place,
+          party_floating_member.out_type,
+          party_floating_member.real_name,
+          party_floating_member.create_by,
+          party_floating_member.phone,
+          party_floating_member.idcard,
+          party_floating_member.floating_province,
+          party_floating_member.family_sort,
+          party_floating_member.floating_latitude,
+          sys_dept.name as deptName
+      FROM
+          party_floating_member
+      LEFT JOIN sys_dept on sys_dept.id = party_floating_member.dept_id
+      where party_floating_member.party_id = #{partyMemberId}
+      and party_floating_member.del_flag = 0
+      order by party_floating_member.create_date desc
+  </select>
+</mapper>

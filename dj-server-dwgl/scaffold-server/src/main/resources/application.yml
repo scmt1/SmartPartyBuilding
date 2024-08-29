@@ -1,0 +1,15 @@
+#spring:
+#  datasource:
+#    dynamic:
+#      primary: master_2
+#      datasource:
+#        master_2:
+#          driver-class-name: com.mysql.cj.jdbc.Driver
+#          url: jdbc:mysql://10.82.44.34:3307/dj_party?characterEncoding=UTF-8&serverTimezone=GMT%2B8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull
+#          username: product
+#          password: productStjt
+#        master_1:
+#          driver-class-name: com.mysql.cj.jdbc.Driver
+#          url: jdbc:mysql://127.0.0.1:3306/dj_party?characterEncoding=UTF-8&serverTimezone=GMT%2B8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull
+#          username: root
+#          password: root

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>icon64*64/通用头像</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="24" cy="24" r="24"></circle>
+    </defs>
+    <g id="icon64*64/通用头像" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon64*64/男">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <use id="Oval-2" fill="#E4F2FE" xlink:href="#path-1"></use>
+        </g>
+        <g id="头像" transform="translate(10.000000, 10.000000)">
+            <rect id="矩形" fill="#000000" fill-rule="nonzero" opacity="0" x="0" y="0" width="28" height="28"></rect>
+            <path d="M17,15 L11,15 C6.15070363,15 2,18.9937976 2,24 L2,24 C2,27 6.08426672,27 11,27 L17,27 C21.7115034,27 26,27 26,24 L26,24 C26,18.9949048 21.8485778,15 17,15 Z" id="形状" fill="#4293F4" opacity="0.5"></path>
+            <path d="M13.4999576,14 C17.6353034,14 21.0002263,10.8604935 21,7.00001339 C21,3.13974753 17.6353317,0 13.4999859,0 C9.36466835,0 6,3.14084586 6,7.00001339 C6,10.8593684 9.36464008,14 13.4999576,14 Z" id="路径" fill="#4293F4" opacity="0.5"></path>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.flyray.bsin.server.mapper.AttachFileMapper">
+  <resultMap id="BaseResultMap" type="me.flyray.bsin.server.domain.AttachFile">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="file_id" jdbcType="BIGINT" property="fileId" />
+    <result column="file_path" jdbcType="VARCHAR" property="filePath" />
+    <result column="file_type" jdbcType="VARCHAR" property="fileType" />
+    <result column="file_name" jdbcType="VARCHAR" property="fileName" />
+    <result column="file_size" jdbcType="INTEGER" property="fileSize" />
+    <result column="upload_time" jdbcType="TIMESTAMP" property="uploadTime" />
+    <result column="shop_id" jdbcType="TIMESTAMP" property="shopId" />
+    <result column="type" jdbcType="TIMESTAMP" property="type" />
+    <result column="attach_file_group_id" jdbcType="BIGINT" property="attachFileGroupId"/>
+  </resultMap>
+    <update id="updateFile">
+      UPDATE tz_attach_file
+      <set>
+        <if test="attachFile.fileName != null">
+          `file_name` = #{attachFile.fileName},
+        </if>
+        <if test="attachFile.attachFileGroupId != null">
+          `attach_file_group_id` = #{attachFile.attachFileGroupId},
+        </if>
+      </set>
+      WHERE file_id = #{attachFile.fileId}
+    </update>
+    <select id="getPage" resultType="me.flyray.bsin.server.domain.AttachFile">
+      SELECT * FROM `tz_attach_file`
+      WHERE shop_id = #{attachFile.shopId}
+      <if test="attachFile.fileName != null and attachFile.fileName != ''">
+        AND file_name LIKE CONCAT('%',#{attachFile.fileName},'%')
+      </if>
+      <if test="attachFile.type != null and attachFile.type != ''">
+        AND `type` = #{attachFile.type}
+      </if>
+      <if test="attachFile.attachFileGroupId != null and attachFile.attachFileGroupId != ''">
+        AND attach_file_group_id = #{attachFile.attachFileGroupId}
+      </if>
+      ORDER BY file_id DESC
+    </select>
+  <update id="updateBatchByAttachFileGroupId">
+    update tz_attach_file
+    set attach_file_group_id = 0
+    where attach_file_group_id = #{attachFileGroupId}
+  </update>
+  <select id="getByIds" resultType="me.flyray.bsin.server.domain.AttachFile">
+    select * from tz_attach_file
+    where file_id in
+    <foreach collection="ids" item="id" open="(" close=")" separator=",">
+      #{id}
+    </foreach>
+  </select>
+  <delete id="batchDeleteByIds">
+    delete from tz_attach_file where file_id in
+    <foreach collection="ids" item="id" open="(" close=")" separator=",">
+      #{id}
+    </foreach>
+  </delete>
+  <update id="batchMoveByShopIdAndIdsAndGroupId">
+    update tz_attach_file set `attach_file_group_id` = #{attachFileGroupId} where shop_id = #{shopId} and file_id IN
+    <foreach collection="fileIds" item="fileId" separator="," open="(" close=")">
+      #{fileId}
+    </foreach>
+  </update>
+  <insert id="save" useGeneratedKeys="true" keyProperty="fileId"  keyColumn="file_id">
+    INSERT INTO tz_attach_file ( `file_path`, `file_type`, `file_name`, `shop_id`, `type`, `file_size`, `upload_time` )
+     VALUES (#{attachFile.filePath},#{attachFile.fileType},#{attachFile.fileName},
+             #{attachFile.shopId},#{attachFile.type},#{attachFile.fileSize},#{attachFile.uploadTime})
+  </insert>
+  <select id="getFileByName" resultType="int">
+    select count(file_id) from tz_attach_file where shop_id = #{shopId} and file_name = #{fileName} and `type` = #{fileType}
+  </select>
+</mapper>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.flyray.bsin.server.mapper.jcxf.JcxfPartyMemberTransferMapper">
+
+    <resultMap id="partyMemberTransferPageData" type="me.flyray.bsin.server.domain.jcxf.JcxfPartyMemberTransfer">
+        <id column="id" property="id"/>
+        <result column="update_date" property="updateDate"/>
+        <result column="transfer_status" property="transferStatus"/>
+        <result column="hang_up_reason" property="hangUpReason"/>
+        <result column="transfer_time" property="transferTime"/>
+        <result column="in_branch_name" property="inBranchName"/>
+        <result column="accept_status" property="acceptStatus"/>
+        <result column="execute_dept" property="executeDept"/>
+        <result column="del_flag" property="delFlag"/>
+        <result column="create_by" property="createBy"/>
+        <result column="reject_reason" property="rejectReason"/>
+        <result column="area_id" property="areaId"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="out_branch_id" property="outBranchId"/>
+        <result column="transfer_type" property="transferType"/>
+        <result column="party_id" property="partyId"/>
+        <result column="in_branch_id" property="inBranchId"/>
+        <result column="create_date" property="createDate"/>
+        <result column="areaName" property="areaName"/>
+        <association property="partyMember" javaType="me.flyray.bsin.server.domain.jcxf.JcxfPartyMember">
+            <result column="real_name" property="realName"/>
+            <result column="phone" property="phone"/>
+            <result column="idcard" property="idcard"/>
+        </association>
+        <association property="oldTzSysDept" javaType="me.flyray.bsin.server.domain.jcxf.JcxfSysDept">
+            <result column="old_dep_id" property="id"/>
+            <result column="old_dep_name" property="name"/>
+        </association>
+        <association property="newTzSysDept" javaType="me.flyray.bsin.server.domain.jcxf.JcxfSysDept">
+            <result column="new_dep_id" property="id"/>
+            <result column="new_dep_name" property="name"/>
+        </association>
+    </resultMap>
+
+    <select id="getJcxfPartyMemberTransferByPage" resultMap="partyMemberTransferPageData">
+        SELECT
+            party_member_transfer.id,
+            party_member_transfer.update_date,
+            party_member_transfer.transfer_status,
+            party_member_transfer.hang_up_reason,
+            party_member_transfer.transfer_time,
+            party_member_transfer.in_branch_name,
+            party_member_transfer.accept_status,
+            party_member_transfer.execute_dept,
+            party_member_transfer.del_flag,
+            party_member_transfer.create_by,
+            party_member_transfer.reject_reason,
+            party_member_transfer.area_id,
+            party_member_transfer.update_by,
+            party_member_transfer.out_branch_id,
+            party_member_transfer.transfer_type,
+            party_member_transfer.party_id,
+            party_member_transfer.in_branch_id,
+            party_member_transfer.create_date,
+            sys_area.merger_name as areaName,
+            sys_dept_old.id AS old_dep_id,
+            sys_dept_old.name AS old_dep_name,
+            sys_dept_new.id AS new_dep_id,
+            sys_dept_new.name AS new_dep_name,
+            party_member.real_name,
+            party_member.phone,
+            party_member.idcard
+        FROM
+            party_member_transfer
+        LEFT JOIN sys_area on sys_area.id = party_member_transfer.area_id
+        LEFT JOIN party_member on party_member.id = party_member_transfer.party_id
+        LEFT JOIN sys_dept sys_dept_old on sys_dept_old.id = party_member_transfer.out_branch_id
+        LEFT JOIN sys_dept sys_dept_new on sys_dept_new.id = party_member_transfer.in_branch_id
+        ${ew.customSqlSegment}
+    </select>
+</mapper>

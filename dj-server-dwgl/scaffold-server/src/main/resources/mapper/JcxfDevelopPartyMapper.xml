@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="me.flyray.bsin.server.mapper.jcxf.JcxfDevelopPartyMapper">
+
+  <select id="getJcxfDevelopPartyByPage" resultType="me.flyray.bsin.server.domain.jcxf.JcxfDevelopParty">
+      SELECT
+            party_member_develop.id,
+            party_member_develop.birthday,
+            party_member_develop.update_date,
+            party_member_develop.education,
+            party_member_develop.submit_date,
+            party_member_develop.train_end_time,
+            party_member_develop.is_qualified,
+            party_member_develop.del_flag,
+            party_member_develop.profile_photo,
+            party_member_develop.update_by,
+            party_member_develop.party_time,
+            party_member_develop.active_date,
+            party_member_develop.national,
+            party_member_develop.person_type,
+            party_member_develop.create_date,
+            party_member_develop.notice,
+            party_member_develop.is_return_workers,
+            party_member_develop.work_unit,
+            party_member_develop.address,
+            party_member_develop.work_position,
+            party_member_develop.transfer_time,
+            party_member_develop.is_ignore,
+            party_member_develop.party_member_id,
+            party_member_develop.sex,
+            party_member_develop.dept_id,
+            party_member_develop.telephone,
+            party_member_develop.avatar,
+            party_member_develop.train_start_time,
+            party_member_develop.develop_date,
+            party_member_develop.real_name,
+            party_member_develop.create_by,
+            party_member_develop.change_organization,
+            party_member_develop.phone,
+            party_member_develop.collages_majors,
+            party_member_develop.idcard,
+            party_member_develop.postpone_flag,
+            party_member_develop.is_train,
+            sys_dept.name as deptName
+        FROM
+            party_member_develop
+        LEFT JOIN sys_dept on sys_dept.id = party_member_develop.dept_id
+      ${ew.customSqlSegment}
+  </select>
+      <select id="getJcxfDevelopPartyById" resultType="me.flyray.bsin.server.domain.vo.JcxfDevelopPartyMemberVo">
+            select * from party_member_develop where id = #{id}
+      </select>
+</mapper>

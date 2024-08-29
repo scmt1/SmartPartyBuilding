@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:sofa="http://sofastack.io/schema/sofaboot"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://sofastack.io/schema/sofaboot http://sofastack.io/schema/sofaboot.xsd"
+       default-autowire="byName">
+
+
+    <!--业务接口sofa注册信息，根据业务需要添加，项目组使用时请删除以下示例工程的注册信息及逻辑接口实现代码-->
+
+    <bean id="tDictDataService" class="me.flyray.bsin.server.impl.TDictDataServiceImpl"/>
+    <sofa:service ref="tDictDataService" interface="me.flyray.bsin.facade.service.TDictDataService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="tDictService" class="me.flyray.bsin.server.impl.TDictServiceImpl"/>
+    <sofa:service ref="tDictService" interface="me.flyray.bsin.facade.service.TDictService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="tzOrganizationWorkService" class="me.flyray.bsin.server.impl.TzOrganizationWorkServiceImpl"/>
+    <sofa:service ref="tzOrganizationWorkService" interface="me.flyray.bsin.facade.service.TzOrganizationWorkService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="attachFileService" class="me.flyray.bsin.server.impl.AttachFileServiceImpl"/>
+    <sofa:service ref="attachFileService" interface="me.flyray.bsin.facade.service.AttachFileService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="tzStudyFileService" class="me.flyray.bsin.server.impl.TzStudyFileServiceImpl"/>
+    <sofa:service ref="tzStudyFileService" interface="me.flyray.bsin.facade.service.TzStudyFileService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="tzStudyVideoService" class="me.flyray.bsin.server.impl.TzStudyVideoServiceImpl"/>
+    <sofa:service ref="tzStudyVideoService" interface="me.flyray.bsin.facade.service.TzStudyVideoService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="tzVideoColumnService" class="me.flyray.bsin.server.impl.TzVideoColumnServiceImpl"/>
+    <sofa:service ref="tzVideoColumnService" interface="me.flyray.bsin.facade.service.TzVideoColumnService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="tzVoteService" class="me.flyray.bsin.server.impl.TzVoteServiceImpl"/>
+    <sofa:service ref="tzVoteService" interface="me.flyray.bsin.facade.service.TzVoteService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="tzVoteDetail" class="me.flyray.bsin.server.impl.TzVoteDetailServiceImpl"/>
+    <sofa:service ref="tzVoteDetail" interface="me.flyray.bsin.facade.service.TzVoteDetailService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="tzVoteUser" class="me.flyray.bsin.server.impl.TzVoteUserServiceImpl"/>
+    <sofa:service ref="tzVoteUser" interface="me.flyray.bsin.facade.service.TzVoteUserService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+    <bean id="tzQuestionBank" class="me.flyray.bsin.server.impl.TzQuestionBankServiceImpl"/>
+    <sofa:service ref="tzQuestionBank" interface="me.flyray.bsin.facade.service.TzQuestionBankService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+    <bean id="tzTest" class="me.flyray.bsin.server.impl.TzTestServiceImpl"/>
+    <sofa:service ref="tzTest" interface="me.flyray.bsin.facade.service.TzTestService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="tzExam" class="me.flyray.bsin.server.impl.TzExamServiceImpl"/>
+    <sofa:service ref="tzExam" interface="me.flyray.bsin.facade.service.TzExamService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="tzXxqg" class="me.flyray.bsin.server.impl.TzXxqgServiceImpl"/>
+    <sofa:service ref="tzXxqg" interface="me.flyray.bsin.facade.service.TzXxqgService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="tzPartyHonor" class="me.flyray.bsin.server.impl.TzPartyHonorImpl"/>
+    <sofa:service ref="tzPartyHonor" interface="me.flyray.bsin.facade.service.TzPartyHonorService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="tzMessage" class="me.flyray.bsin.server.impl.TzMessageServiceImpl"/>
+    <sofa:service ref="tzMessage" interface="me.flyray.bsin.facade.service.TzMessageService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+    <bean id="tzMessageTemplate" class="me.flyray.bsin.server.impl.TzMessageTemplateServiceImpl"/>
+    <sofa:service ref="tzMessageTemplate" interface="me.flyray.bsin.facade.service.TzMessageTemplateService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+    <bean id="tzMessageAuto" class="me.flyray.bsin.server.impl.TzMessageAutoServiceImpl"/>
+    <sofa:service ref="tzMessageAuto" interface="me.flyray.bsin.facade.service.TzMessageAutoService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="tzStudyUser" class="me.flyray.bsin.server.impl.TzStudyUserServiceImpl"/>
+    <sofa:service ref="tzStudyUser" interface="me.flyray.bsin.facade.service.TzStudyUserService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="tzStudyView" class="me.flyray.bsin.server.impl.TzStudyViewServiceImpl"/>
+    <sofa:service ref="tzStudyView" interface="me.flyray.bsin.facade.service.TzStudyViewService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="tzTwoBestOneFirst" class="me.flyray.bsin.server.impl.TzTwoBestOneFirstServiceImpl"/>
+    <sofa:service ref="tzTwoBestOneFirst" interface="me.flyray.bsin.facade.service.TzTwoBestOneFirstService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="tzTwoBestOneFirstTime" class="me.flyray.bsin.server.impl.TzTwoBestOneFirstTimeServiceImpl"/>
+    <sofa:service ref="tzTwoBestOneFirstTime" interface="me.flyray.bsin.facade.service.TzTwoBestOneFirstTimeService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="tzTwoBestOneFirstAudit" class="me.flyray.bsin.server.impl.TzTwoBestOneFirstAuditServiceImpl"/>
+    <sofa:service ref="tzTwoBestOneFirstAudit" interface="me.flyray.bsin.facade.service.TzTwoBestOneFirstAuditService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="tzTradeUnion" class="me.flyray.bsin.server.impl.TzTradeUnionServiceImpl"/>
+    <sofa:service ref="tzTradeUnion" interface="me.flyray.bsin.facade.service.TzTradeUnionService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+    <bean id="tzTradeActive" class="me.flyray.bsin.server.impl.TzTradeActiveServiceImpl"/>
+    <sofa:service ref="tzTradeActive" interface="me.flyray.bsin.facade.service.TzTradeActiveService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="tzTeam" class="me.flyray.bsin.server.impl.TzTeamServiceImpl"/>
+    <sofa:service ref="tzTeam" interface="me.flyray.bsin.facade.service.TzTeamService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="tzTeamActive" class="me.flyray.bsin.server.impl.TzTeamActiveServiceImpl"/>
+    <sofa:service ref="tzTeamActive" interface="me.flyray.bsin.facade.service.TzTeamActiveService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="tzUnitedDept" class="me.flyray.bsin.server.impl.TzUnitedDeptServiceImpl"/>
+    <sofa:service ref="tzUnitedDept" interface="me.flyray.bsin.facade.service.TzUnitedDeptService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="tzUnitedPerson" class="me.flyray.bsin.server.impl.TzUnitedPersonServiceImpl"/>
+    <sofa:service ref="tzUnitedPerson" interface="me.flyray.bsin.facade.service.TzUnitedPersonService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+
+    <bean id="jcxfSysDept" class="me.flyray.bsin.server.impl.jcxf.JcxfSysDeptServiceImpl"/>
+    <sofa:service ref="jcxfSysDept" interface="me.flyray.bsin.facade.service.JcxfSysDeptService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="jcxfPartyMember" class="me.flyray.bsin.server.impl.jcxf.JcxfPartyMemberServiceImpl"/>
+    <sofa:service ref="jcxfPartyMember" interface="me.flyray.bsin.facade.service.JcxfPartyMemberService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="jcxfTermDept" class="me.flyray.bsin.server.impl.jcxf.JcxfTermDeptServiceImpl"/>
+    <sofa:service ref="jcxfTermDept" interface="me.flyray.bsin.facade.service.JcxfTermDeptService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="jcxfPartyFloatingMember" class="me.flyray.bsin.server.impl.jcxf.JcxfPartyFloatingMemberServiceImpl"/>
+    <sofa:service ref="jcxfPartyFloatingMember" interface="me.flyray.bsin.facade.service.JcxfPartyFloatingMemberService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="jcxfPartyMemberTransferService" class="me.flyray.bsin.server.impl.jcxf.JcxfPartyMemberTransferServiceImpl"/>
+    <sofa:service ref="jcxfPartyMemberTransferService" interface="me.flyray.bsin.facade.service.JcxfPartyMemberTransferService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="jcxfDevelopPartyService" class="me.flyray.bsin.server.impl.jcxf.JcxfDevelopPartyServiceImpl"/>
+    <sofa:service ref="jcxfDevelopPartyService" interface="me.flyray.bsin.facade.service.JcxfDevelopPartyService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="jcxfSysAreaService" class="me.flyray.bsin.server.impl.jcxf.JcxfSysAreaServiceImpl"/>
+    <sofa:service ref="jcxfSysAreaService" interface="me.flyray.bsin.facade.service.JcxfSysAreaService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="jcxfSysDictionaryService" class="me.flyray.bsin.server.impl.jcxf.JcxfSysDictionaryServiceImpl"/>
+    <sofa:service ref="jcxfSysDictionaryService" interface="me.flyray.bsin.facade.service.JcxfSysDictionaryService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="jcxfDeptPositionService" class="me.flyray.bsin.server.impl.jcxf.JcxfDeptPositionServiceImpl"/>
+    <sofa:service ref="jcxfDeptPositionService" interface="me.flyray.bsin.facade.service.JcxfDeptPositionService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="jcxfPayFeeService" class="me.flyray.bsin.server.impl.jcxf.JcxfPayFeeServiceImpl"/>
+    <sofa:service ref="jcxfPayFeeService" interface="me.flyray.bsin.facade.service.JcxfPayFeeService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="jcxfPayFeeDetailService" class="me.flyray.bsin.server.impl.jcxf.JcxfPayFeeDetailServiceImpl"/>
+    <sofa:service ref="jcxfPayFeeDetailService" interface="me.flyray.bsin.facade.service.JcxfPayFeeDetailService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="jcxfOrganizationLifeService" class="me.flyray.bsin.server.impl.jcxf.JcxfOrganizationLifeServiceImpl"/>
+    <sofa:service ref="jcxfOrganizationLifeService" interface="me.flyray.bsin.facade.service.JcxfOrganizationLifeService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="jcxfSJKB" class="me.flyray.bsin.server.impl.jcxf.JcxfSJKBImpl"/>
+    <sofa:service ref="jcxfSJKB" interface="me.flyray.bsin.facade.service.JcxfSJKBService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="tzLoginLog" class="me.flyray.bsin.server.impl.TzLoginLogServiceImpl"/>
+    <sofa:service ref="tzLoginLog" interface="me.flyray.bsin.facade.service.TzLoginLogService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="tzPayFeeDetailLog" class="me.flyray.bsin.server.impl.TzPayFeeDetailLogServiceImpl"/>
+    <sofa:service ref="tzPayFeeDetailLog" interface="me.flyray.bsin.facade.service.TzPayFeeDetailLogService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="homePageService" class="me.flyray.bsin.server.impl.HomePageServiceImpl"/>
+    <sofa:service ref="homePageService" interface="me.flyray.bsin.facade.service.HomePageService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="JcetService" class="me.flyray.bsin.server.impl.JcetServiceImpl"/>
+    <sofa:service ref="JcetService" interface="me.flyray.bsin.facade.service.JcetService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="jcxfSysDeptButtonRoleService" class="me.flyray.bsin.server.impl.jcxf.JcxfSysDeptButtonRoleServiceImpl"/>
+    <sofa:service ref="jcxfSysDeptButtonRoleService" interface="me.flyray.bsin.facade.service.JcxfSysDeptButtonRoleService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="tzMessageAutoRoleService" class="me.flyray.bsin.server.impl.TzMessageAutoRoleServiceImpl"/>
+    <sofa:service ref="tzMessageAutoRoleService" interface="me.flyray.bsin.facade.service.TzMessageAutoRoleService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="tzMessageAutoContentService" class="me.flyray.bsin.server.impl.TzMessageAutoContentServiceImpl"/>
+    <sofa:service ref="tzMessageAutoContentService" interface="me.flyray.bsin.facade.service.TzMessageAutoContentService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="jcxfMeetingService" class="me.flyray.bsin.server.impl.jcxf.JcxfMeetingServiceImpl"/>
+    <sofa:service ref="jcxfMeetingService" interface="me.flyray.bsin.facade.service.JcxfMeetingService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+
+    <bean id="tzUserTagService" class="me.flyray.bsin.server.impl.TzUserTagServiceImpl"/>
+    <sofa:service ref="tzUserTagService" interface="me.flyray.bsin.facade.service.TzUserTagService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+
+    <bean id="cqSysOrgService" class="me.flyray.bsin.server.impl.cq.CqSysOrgServiceImpl"/>
+    <sofa:service ref="cqSysOrgService" interface="me.flyray.bsin.facade.service.CqSysOrgService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="cqPayFeeHistoryService" class="me.flyray.bsin.server.impl.cq.CqPayFeeHistoryServiceImpl"/>
+    <sofa:service ref="cqPayFeeHistoryService" interface="me.flyray.bsin.facade.service.CqPayFeeHistoryService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="tzMessageSignService" class="me.flyray.bsin.server.impl.TzMessageSignServiceImpl"/>
+    <sofa:service ref="tzMessageSignService" interface="me.flyray.bsin.facade.service.TzMessageSignService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+
+    <bean id="wxService" class="me.flyray.bsin.server.impl.WxServiceImpl"/>
+    <sofa:service ref="wxService" interface="me.flyray.bsin.facade.service.WxService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+</beans>

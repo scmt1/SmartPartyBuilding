@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.flyray.bsin.server.mapper.TzPartyHonorMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="me.flyray.bsin.server.domain.TzPartyHonor">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="dept_id" jdbcType="INTEGER" property="deptId" />
+        <result column="tenant_id" jdbcType="VARCHAR" property="tenantId" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="party_member_id" jdbcType="INTEGER" property="partyMemberId" />
+        <result column="honor_name" jdbcType="VARCHAR" property="honorName" />
+        <result column="honor_type" jdbcType="INTEGER" property="honorType" />
+        <result column="image_path" jdbcType="VARCHAR" property="imagePath" />
+        <result column="honor_class" jdbcType="INTEGER" property="honorClass" />
+        <result column="get_year" jdbcType="VARCHAR" property="getYear" />
+        <result column="reason" jdbcType="VARCHAR" property="reason" />
+        <result column="del_flag" jdbcType="VARCHAR" property="delFlag" />
+        <result column="upload_id" jdbcType="INTEGER" property="uploadId" />
+        <result column="upload_type" jdbcType="INTEGER" property="uploadType" />
+        <result column="award_name" jdbcType="VARCHAR" property="awardName" />
+
+    </resultMap>
+    <select id="deptHonorRank" resultType="me.flyray.bsin.server.domain.TzPartyHonor">
+        select sd.name as deptName, count(1) as count , tp.dept_id from tz_party_honor tp
+        LEFT JOIN sys_dept sd ON tp.dept_id = sd.id
+        <where>
+            tp.honor_type = 1
+            <if test="deptIds!=null and deptIds.size()>0">
+                and tp.dept_id in
+                <foreach item="item" collection="deptIds" separator="," open="(" close=")" index="">  #{item, jdbcType=INTEGER}
+                </foreach>
+            </if>
+            <if test="honorClass !=null and honorClass!=''">
+              and  tp.honor_class=#{honorClass}
+            </if>
+        </where>
+        GROUP BY tp.dept_id
+        ORDER BY count desc
+
+    </select>
+
+</mapper>

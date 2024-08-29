@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="me.flyray.bsin.server.mapper.CqSysOrgMapper">
+
+
+    <select id="getParentDeptListById" resultType="me.flyray.bsin.server.domain.CqSysOrg">
+        select a.id, a.parent_id, a.name,a.org_level,
+               (case when (select count(*) as num from cq_organization b where b.parent_id = a.id) > 0 then false else true end) as isLeaf
+        from cq_organization a where a.parent_id = #{id} order by name asc
+    </select>
+
+
+    <select id="selectChildrenIdsById" resultType="java.lang.Long">
+        select id from cq_organization
+        <where>
+            org_level LIKE concat( '%-', #{id}, '-%' )
+        </where>
+    </select>
+</mapper>

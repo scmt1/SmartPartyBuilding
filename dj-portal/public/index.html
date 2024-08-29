@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="icon" href="<%= BASE_URL %>logo.png">
+  <title>智慧党建云平台</title>
+  <!--[if lt IE 11]>
+  <script>window.location.href = '/html/ie.html';</script><![endif]-->
+  <style>
+
+    /*---滚动条默认显示样式--*/
+
+    ::-webkit-scrollbar-thumb {
+
+      /*background-color: gray;*/
+      background-color: rgba(0, 0, 0, 0.30);
+
+      height: 50px;
+
+      outline-offset: -2px;
+
+      outline: 2px solid #fff;
+
+      -webkit-border-radius: 4px;
+
+      border: 2px solid #fff;
+
+    }
+
+    /*---鼠标点击滚动条显示样式--*/
+
+    ::-webkit-scrollbar-thumb:hover {
+
+      background-color: gray;
+
+      height: 50px;
+
+      -webkit-border-radius: 4px;
+
+    }
+
+    /*---滚动条大小--*/
+
+    ::-webkit-scrollbar {
+
+      width: 9px;
+
+      height: 9px;
+
+    }
+
+    /*---滚动框背景样式--*/
+
+    ::-webkit-scrollbar-track-piece {
+
+      background-color: #fff;
+
+      -webkit-border-radius: 0;
+
+    }
+
+    html,
+    body,
+    #app {
+      height: 100%;
+      margin: 0px;
+      padding: 0px;
+    }
+
+    .chromeframe {
+      margin: 0.2em 0;
+      background: #ccc;
+      color: #000;
+      padding: 0.2em 0;
+    }
+
+    /*#loader-wrapper {*/
+    /*  position: fixed;*/
+    /*  top: 0;*/
+    /*  left: 0;*/
+    /*  width: 100%;*/
+    /*  height: 100%;*/
+    /*  z-index: 999999;*/
+    /*}*/
+
+    /*#loader {*/
+    /*  display: block;*/
+    /*  position: relative;*/
+    /*  left: 50%;*/
+    /*  top: 50%;*/
+    /*  width: 150px;*/
+    /*  height: 150px;*/
+    /*  margin: -75px 0 0 -75px;*/
+    /*  border-radius: 50%;*/
+    /*  border: 3px solid transparent;*/
+    /*  border-top-color: #FFF;*/
+    /*  -webkit-animation: spin 2s linear infinite;*/
+    /*  -ms-animation: spin 2s linear infinite;*/
+    /*  -moz-animation: spin 2s linear infinite;*/
+    /*  -o-animation: spin 2s linear infinite;*/
+    /*  animation: spin 2s linear infinite;*/
+    /*  z-index: 1001;*/
+    /*}*/
+
+    /*#loader:before {*/
+    /*  content: "";*/
+    /*  position: absolute;*/
+    /*  top: 5px;*/
+    /*  left: 5px;*/
+    /*  right: 5px;*/
+    /*  bottom: 5px;*/
+    /*  border-radius: 50%;*/
+    /*  border: 3px solid transparent;*/
+    /*  border-top-color: #FFF;*/
+    /*  -webkit-animation: spin 3s linear infinite;*/
+    /*  -moz-animation: spin 3s linear infinite;*/
+    /*  -o-animation: spin 3s linear infinite;*/
+    /*  -ms-animation: spin 3s linear infinite;*/
+    /*  animation: spin 3s linear infinite;*/
+    /*}*/
+
+    /*#loader:after {*/
+    /*  content: "";*/
+    /*  position: absolute;*/
+    /*  top: 15px;*/
+    /*  left: 15px;*/
+    /*  right: 15px;*/
+    /*  bottom: 15px;*/
+    /*  border-radius: 50%;*/
+    /*  border: 3px solid transparent;*/
+    /*  border-top-color: #FFF;*/
+    /*  -moz-animation: spin 1.5s linear infinite;*/
+    /*  -o-animation: spin 1.5s linear infinite;*/
+    /*  -ms-animation: spin 1.5s linear infinite;*/
+    /*  -webkit-animation: spin 1.5s linear infinite;*/
+    /*  animation: spin 1.5s linear infinite;*/
+    /*}*/
+
+
+    /*@-webkit-keyframes spin {*/
+    /*  0% {*/
+    /*    -webkit-transform: rotate(0deg);*/
+    /*    -ms-transform: rotate(0deg);*/
+    /*    transform: rotate(0deg);*/
+    /*  }*/
+    /*  100% {*/
+    /*    -webkit-transform: rotate(360deg);*/
+    /*    -ms-transform: rotate(360deg);*/
+    /*    transform: rotate(360deg);*/
+    /*  }*/
+    /*}*/
+
+    /*@keyframes spin {*/
+    /*  0% {*/
+    /*    -webkit-transform: rotate(0deg);*/
+    /*    -ms-transform: rotate(0deg);*/
+    /*    transform: rotate(0deg);*/
+    /*  }*/
+    /*  100% {*/
+    /*    -webkit-transform: rotate(360deg);*/
+    /*    -ms-transform: rotate(360deg);*/
+    /*    transform: rotate(360deg);*/
+    /*  }*/
+    /*}*/
+
+
+    /*#loader-wrapper .loader-section {*/
+    /*  position: fixed;*/
+    /*  top: 0;*/
+    /*  width: 51%;*/
+    /*  height: 100%;*/
+    /*  background: #7171C6;*/
+    /*  z-index: 1000;*/
+    /*  -webkit-transform: translateX(0);*/
+    /*  -ms-transform: translateX(0);*/
+    /*  transform: translateX(0);*/
+    /*}*/
+
+    /*#loader-wrapper .loader-section.section-left {*/
+    /*  left: 0;*/
+    /*}*/
+
+    /*#loader-wrapper .loader-section.section-right {*/
+    /*  right: 0;*/
+    /*}*/
+
+
+    /*.loaded #loader-wrapper .loader-section.section-left {*/
+    /*  -webkit-transform: translateX(-100%);*/
+    /*  -ms-transform: translateX(-100%);*/
+    /*  transform: translateX(-100%);*/
+    /*  -webkit-transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000);*/
+    /*  transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000);*/
+    /*}*/
+
+    /*.loaded #loader-wrapper .loader-section.section-right {*/
+    /*  -webkit-transform: translateX(100%);*/
+    /*  -ms-transform: translateX(100%);*/
+    /*  transform: translateX(100%);*/
+    /*  -webkit-transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000);*/
+    /*  transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000);*/
+    /*}*/
+
+    /*.loaded #loader {*/
+    /*  opacity: 0;*/
+    /*  -webkit-transition: all 0.3s ease-out;*/
+    /*  transition: all 0.3s ease-out;*/
+    /*}*/
+
+    /*.loaded #loader-wrapper {*/
+    /*  visibility: hidden;*/
+    /*  -webkit-transform: translateY(-100%);*/
+    /*  -ms-transform: translateY(-100%);*/
+    /*  transform: translateY(-100%);*/
+    /*  -webkit-transition: all 0.3s 1s ease-out;*/
+    /*  transition: all 0.3s 1s ease-out;*/
+    /*}*/
+
+    /*.no-js #loader-wrapper {*/
+    /*  display: none;*/
+    /*}*/
+
+    /*.no-js h1 {*/
+    /*  color: #222222;*/
+    /*}*/
+
+    /*#loader-wrapper .load_title {*/
+    /*  font-family: 'Open Sans';*/
+    /*  color: #FFF;*/
+    /*  font-size: 19px;*/
+    /*  width: 100%;*/
+    /*  text-align: center;*/
+    /*  z-index: 9999999999999;*/
+    /*  position: absolute;*/
+    /*  top: 60%;*/
+    /*  opacity: 1;*/
+    /*  line-height: 30px;*/
+    /*}*/
+
+    /*#loader-wrapper .load_title span {*/
+    /*  font-weight: normal;*/
+    /*  font-style: italic;*/
+    /*  font-size: 13px;*/
+    /*  color: #FFF;*/
+    /*  opacity: 0.5;*/
+    /*}*/
+    .page-loading-wrap {
+      padding: 120px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .la-timer,
+    .la-timer > div {
+      position: relative;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    .la-timer {
+      display: block;
+      font-size: 0;
+      color: #fff;
+    }
+
+    .la-timer.la-dark {
+      color: #333;
+    }
+
+    .la-timer > div {
+      display: inline-block;
+      float: none;
+      background-color: currentColor;
+      border: 0 solid currentColor;
+    }
+
+    .la-timer {
+      width: 32px;
+      height: 32px;
+    }
+
+    .la-timer > div {
+      width: 32px;
+      height: 32px;
+      background: transparent;
+      border-width: 2px;
+      border-radius: 100%;
+    }
+
+    .la-timer > div:before,
+    .la-timer > div:after {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      display: block;
+      width: 2px;
+      margin-top: -1px;
+      margin-left: -1px;
+      content: "";
+      background: currentColor;
+      border-radius: 2px;
+      -webkit-transform-origin: 1px 1px 0;
+      -moz-transform-origin: 1px 1px 0;
+      -ms-transform-origin: 1px 1px 0;
+      -o-transform-origin: 1px 1px 0;
+      transform-origin: 1px 1px 0;
+      -webkit-animation: timer-loader 1250ms infinite linear;
+      -moz-animation: timer-loader 1250ms infinite linear;
+      -o-animation: timer-loader 1250ms infinite linear;
+      animation: timer-loader 1250ms infinite linear;
+      -webkit-animation-delay: -625ms;
+      -moz-animation-delay: -625ms;
+      -o-animation-delay: -625ms;
+      animation-delay: -625ms;
+    }
+
+    .la-timer > div:before {
+      height: 12px;
+    }
+
+    .la-timer > div:after {
+      height: 8px;
+      -webkit-animation-duration: 15s;
+      -moz-animation-duration: 15s;
+      -o-animation-duration: 15s;
+      animation-duration: 15s;
+      -webkit-animation-delay: -7.5s;
+      -moz-animation-delay: -7.5s;
+      -o-animation-delay: -7.5s;
+      animation-delay: -7.5s;
+    }
+
+    @-webkit-keyframes timer-loader {
+      0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+
+      100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+
+    @-moz-keyframes timer-loader {
+      0% {
+        -moz-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+
+      100% {
+        -moz-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+
+    @-o-keyframes timer-loader {
+      0% {
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+
+      100% {
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes timer-loader {
+      0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+
+      100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <!--	    <div id="loader-wrapper">-->
+  <!--		    <div id="loader"></div>-->
+  <!--		    <div class="loader-section section-left"></div>-->
+  <!--		    <div class="loader-section section-right"></div>-->
+  <!--		    <div class="load_title">正在加载系统资源，请耐心等待</div>-->
+  <!--      </div>-->
+  <div class="page-loading-wrap">
+    <div style="color: #4e9ff5" class="la-timer">
+      <div></div>
+    </div>
+    <h4 style="margin-top:20px;font-size:14px;font-weight:400;color: #515a6e;">正在加载资源...</h4>
+  </div>
+</div>
+</body>
+</html>

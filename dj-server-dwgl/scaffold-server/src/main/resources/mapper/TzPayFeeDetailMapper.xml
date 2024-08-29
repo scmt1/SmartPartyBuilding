@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.flyray.bsin.server.mapper.TzPayFeeDetailMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="me.flyray.bsin.server.domain.TzPayFeeDetail">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="pay_month" property="payMonth"/>
+        <result column="should_pay" property="shouldPay"/>
+        <result column="actually_pay" property="actuallyPay"/>
+        <result column="dept_id" property="deptId"/>
+        <result column="dept_name" property="deptName"/>
+        <result column="status" property="status"/>
+        <result column="is_instead_pay" property="isInsteadPay"/>
+        <result column="pay_time" property="payTime"/>
+        <result column="create_time" property="createTime"/>
+        <result column="pay_fee_id" property="payFeeId"/>
+        <result column="id_card_last" property="idCardLast"/>
+        <result column="del_flag" property="delFlag"/>
+        <result column="party_member_id" property="partyMemberId"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id
+        , name, pay_month, should_pay, actually_pay, dept_id, dept_name, status, is_instead_pay, pay_time, create_time, pay_fee_id
+    </sql>
+    <insert id="saveBatchList">
+        insert into tz_pay_fee_detail(name, pay_month, should_pay, actually_pay, dept_id, dept_name, status,
+        is_instead_pay, create_time, pay_fee_id, del_flag, party_member_id, payment_type,payment_base,payment_ratio,payment_reason,reason_other,confirm_material)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (
+             #{item.name},
+            #{item.payMonth},
+            #{item.shouldPay},
+            #{item.actuallyPay},
+            #{item.deptId},
+            #{item.deptName},
+            #{item.status},
+            #{item.isInsteadPay},
+            #{item.createTime},
+            #{item.payFeeId},
+            #{item.delFlag},
+            #{item.partyMemberId},
+            #{item.paymentType},
+            #{item.paymentBase},
+            #{item.paymentRatio},
+            #{item.paymentReason},
+            #{item.reasonOther},
+            #{item.confirmMaterial}
+            )
+        </foreach>
+    </insert>
+
+
+    <select id="selectByType" resultType="me.flyray.bsin.server.domain.TzPayFeeDetail">
+        select * from tz_pay_fee_detail left join party_member on tz_pay_fee_detail.party_member_id = party_member.id
+        ${ew.customSqlSegment}
+        <if test="type!=null and type!=''">
+            and party_member.person_type = #{type}
+        </if>
+    </select>
+    <select id="exportByType" resultType="me.flyray.bsin.server.domain.TzPayFeeDetail">
+        select * from tz_pay_fee_detail left join party_member on tz_pay_fee_detail.party_member_id = party_member.id
+        ${ew.customSqlSegment}
+        <if test="type!=null and type!=''">
+            and party_member.person_type = #{type}
+        </if>
+    </select>
+    <select id="queryPartyMemberPayDetailList" resultType="me.flyray.bsin.server.domain.TzPayFeeDetail">
+        select tz_pay_fee_detail.*
+        from tz_pay_fee_detail
+                 left join tz_pay_fee on tz_pay_fee_detail.pay_fee_id = tz_pay_fee.id ${ew.customSqlSegment}
+    </select>
+
+    <select id="getPayFeeDetailPersonList" resultType="java.util.Map">
+        SELECT name,
+        party_member_id AS partyMemberId,
+        SUM(IF(right(pay_month, 2)='01',should_pay,0)) as 'january',
+        SUM(IF(right(pay_month, 2)='02',should_pay,0)) as 'february',
+        SUM(IF(right(pay_month, 2)='03',should_pay,0)) as 'march',
+        SUM(IF(right(pay_month, 2)='04',should_pay,0)) as 'april',
+        SUM(IF(right(pay_month, 2)='05',should_pay,0)) as 'may',
+        SUM(IF(right(pay_month, 2)='06',should_pay,0)) as 'june',
+        SUM(IF(right(pay_month, 2)='07',should_pay,0)) as 'july',
+        SUM(IF(right(pay_month, 2)='08',should_pay,0)) as 'august',
+        SUM(IF(right(pay_month, 2)='09',should_pay,0)) as 'september',
+        SUM(IF(right(pay_month, 2)='10',should_pay,0)) as 'october',
+        SUM(IF(right(pay_month, 2)='11',should_pay,0)) as 'november',
+        SUM(IF(right(pay_month, 2)='12',should_pay,0)) as 'december'
+        ,SUM(IF(right(pay_month, 2)='01', status,0)) AS status1
+        ,SUM(IF(right(pay_month, 2)='02', status,0)) AS status2
+        ,SUM(IF(right(pay_month, 2)='03', status,0)) AS status3
+        ,SUM(IF(right(pay_month, 2)='04', status,0)) AS status4
+        ,SUM(IF(right(pay_month, 2)='05', status,0)) AS status5
+        ,SUM(IF(right(pay_month, 2)='06', status,0)) AS status6
+        ,SUM(IF(right(pay_month, 2)='07', status,0)) AS status7
+        ,SUM(IF(right(pay_month, 2)='08', status,0)) AS status8
+        ,SUM(IF(right(pay_month, 2)='09', status,0)) AS status9
+        ,SUM(IF(right(pay_month, 2)='10', status,0)) AS status10
+        ,SUM(IF(right(pay_month, 2)='11', status,0)) AS status11
+        ,SUM(IF(right(pay_month, 2)='12', status,0)) AS status12
+        FROM tz_pay_fee_detail
+        WHERE del_flag = 0 AND LEFT(pay_month,4) = #{payYear}
+        <if test="deptList != null">
+            AND dept_id IN
+            <foreach collection="deptList" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="name != null and name != ''">
+            AND name = #{name}
+        </if>
+        GROUP BY party_member_id
+    </select>
+
+
+    <update id="updatePartyMemberDeptInfo">
+        update dj_party.tz_pay_fee_detail set `dept_id` = #{payFeeDetail.deptId},`dept_name` = #{payFeeDetail.deptName}
+        where party_member_id = #{payFeeDetail.partyMemberId}
+    </update>
+
+    <update id="updatePayFeeDetailDelFlag">
+        update dj_party.tz_pay_fee_detail set `del_flag` = #{payFeeDetail.delFlag}
+        where party_member_id = #{payFeeDetail.partyMemberId}
+    </update>
+
+    <select id="getPayFeeDetailStatistics" resultType="me.flyray.bsin.server.domain.vo.PayFeeDetailsVo">
+        select
+        count( id ) AS allPartyNum,
+        sum( should_pay ) AS allPartyMoney,
+        ifnull(sum( CASE WHEN STATUS = 1 THEN should_pay ELSE 0 END ),0) AS alreadyPartyMoney,
+        ifnull(sum( CASE WHEN STATUS = 1 THEN 1 ELSE 0 END ),0) AS alreadyPartyNum,
+        ifnull(sum( CASE WHEN STATUS = 0 THEN should_pay ELSE 0 END ),0) AS notPartyMoney,
+        ifnull(sum( CASE WHEN STATUS = 0 THEN 1 ELSE 0 END ),0) AS notPartyNum
+        from
+        tz_pay_fee_detail where del_flag = 0 and should_pay > 0 and pay_month = #{payMonth} and dept_id in
+        <foreach collection="deptList" item="deptId" separator="," open="(" close=")">
+            #{deptId}
+        </foreach>
+    </select>
+
+    <select id="getPayFeeStatistics" resultType="me.flyray.bsin.server.domain.vo.PayFeeDetailsVo">
+        select
+        count( id ) AS allPartyNum,
+        sum( should_pay ) AS allPartyMoney,
+        ifnull(sum( CASE WHEN STATUS = 1 THEN should_pay ELSE 0 END ),0) AS alreadyPartyMoney,
+        ifnull(sum( CASE WHEN STATUS = 1 THEN 1 ELSE 0 END ),0) AS alreadyPartyNum,
+        ifnull(sum( CASE WHEN STATUS = 0 THEN should_pay ELSE 0 END ),0) AS notPartyMoney,
+        ifnull(sum( CASE WHEN STATUS = 0 THEN 1 ELSE 0 END ),0) AS notPartyNum
+        from
+        tz_pay_fee_detail where del_flag = 0 and should_pay > 0 and pay_month &gt;= #{startMonth} and pay_month &lt;= #{endMonth} and dept_id in
+        <foreach collection="deptList" item="deptId" separator="," open="(" close=")">
+            #{deptId}
+        </foreach>
+    </select>
+
+    <select id="getNoDonePartyMember" resultType="me.flyray.bsin.server.domain.jcxf.JcxfPartyMember">
+        select pm.real_name,pm.avatar from jcxf.party_member as pm
+        left join dj_party.tz_pay_fee_detail as pd on pd.party_member_id = pm.id
+        where pd.status = 0
+        and pd.pay_month = #{payMonth}
+        and pd.del_flag = 0
+        and should_pay > 0
+        and pd.dept_id in
+        <foreach collection="deptList" item="deptId" separator="," open="(" close=")">
+            #{deptId}
+        </foreach>
+    </select>
+</mapper>

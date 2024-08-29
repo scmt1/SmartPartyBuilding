@@ -1,0 +1,18 @@
+import Cookies from 'js-cookie'
+
+// const TokenKey = 'Admin-Token'
+const TokenKey = 'rcyszj_portal-access-token'
+// const TokenKey = 'rcyszj_portal_test-access-token'
+
+export function getToken() {
+  return Cookies.get(TokenKey)
+  // return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXZpY2VfaWQiOiIwMDAwMDAiLCJsZXZlbCI6IkxWMiIsInVzZXJfbmFtZSI6ImFkbWluIiwib3JnX3pvbmVfbmFtZSI6IuWFrOWuieWxgCIsImRlcHRfbmFtZSI6IuWKnuWFrOWupCIsInJlYWxfbmFtZSI6IuS6juaWh-iBqiIsImF2YXRhciI6Imh0dHBzOi8vbWluaW8tdGVzdC5sempjemwuY29tL2FwcC1wYXRyb2wvdXBsb2FkLzIwMjMwMTI5LzI5MDMwOWEzMzBjNTBiZjY4MDIxMWUzZjFmNTNjMmJhLmpwZyIsImNsaWVudF9pZCI6Imx6LUUtcGF0cm9sIiwicm9sZV9uYW1lIjoiIiwibGljZW5zZSI6InBvd2VyZWQgYnkgc3RqdCIsImF1ZCI6WyJvYXV0aDItcmVzb3VyY2UiXSwidXNlcl9pZCI6IjEiLCJyb2xlX2lkIjoiIiwic2NvcGUiOlsiYWxsIl0sIm5pY2tfbmFtZSI6IueahOW-ruWNmuesrOS4gOaci-WPi-eahOeuoeeQhiIsImFwcF96b25lX2lkIjoibHotRS1wYXRyb2wiLCJvYXV0aF9pZCI6IiIsImRldGFpbCI6eyJ0eXBlIjoiYXBwIn0sImV4cCI6MTY3NzAzMzQ4NCwiZGVwdF9pZCI6IjEiLCJqdGkiOiJkOTkyYTA5My1lOTA2LTRmY2UtYmRmMy1kNTUxNmNjZWUwMGEiLCJhY2NvdW50IjoiYWRtaW4ifQ.OYz1YvRQu0r9Nf4FKDwyhKbx0D899aFbXvd2EW2hQVg"
+}
+
+export function setToken(token) {
+  return Cookies.set(TokenKey, token)
+}
+
+export function removeToken() {
+  return Cookies.remove(TokenKey)
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.flyray.bsin.server.mapper.jcxf.JcxfPartyMemberTransferMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, party_member_id, college_major, home_addr, develop_state, submit_date, active_date, develop_date, pre_date, official_date, bak, notice, create_time, update_time
+    </sql>
+
+</mapper>

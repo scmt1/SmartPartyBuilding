@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.flyray.bsin.server.mapper.jcxf.JcxfTermDeptMapper">
+
+
+    <select id="selectExceedFinishTimeCount" resultType="java.lang.Integer">
+        select count(1) from (
+        SELECT dept_id, MAX(this_session_finish_time) as this_session_finish_time FROM branch_reelection
+        WHERE del_flag = 0 AND dept_id IN
+        <foreach collection="deptList" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        GROUP BY dept_id
+        ) a WHERE a.this_session_finish_time &lt; #{date}
+    </select>
+
+    <select id="selectExceedFinishTimeDeptIdList" resultType="java.lang.Long">
+        select dept_id from (
+        SELECT dept_id, MAX(this_session_finish_time) as this_session_finish_time FROM branch_reelection
+        WHERE del_flag = 0 AND dept_id IN
+        <foreach collection="deptList" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        GROUP BY dept_id
+        ) a WHERE a.this_session_finish_time &lt; #{date}
+    </select>
+
+    <select id="selectSurplusFinishTimeDeptIdList" resultType="java.lang.Long">
+        select dept_id from (
+        SELECT dept_id, MAX(this_session_finish_time) as this_session_finish_time FROM branch_reelection
+        WHERE del_flag = 0 AND dept_id IN
+        <foreach collection="deptList" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        GROUP BY dept_id
+        ) a WHERE DATEDIFF(NOW(), a.this_session_finish_time) = #{days}
+    </select>
+</mapper>

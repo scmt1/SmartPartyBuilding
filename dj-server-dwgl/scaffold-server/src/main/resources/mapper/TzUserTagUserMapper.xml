@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.flyray.bsin.server.mapper.TzUserTagUserMapper">
+
+
+    <select id="queryTableData" resultType="me.flyray.bsin.server.domain.vo.JcxfPartyMemberVo">
+        SELECT id, real_name, phone FROM jcxf.party_member pm JOIN tz_user_tag_user tutu ON tutu.user_id = pm.id
+        WHERE tutu.user_tag_id = #{tagId}
+    </select>
+</mapper>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.flyray.bsin.server.mapper.jcxf.JcxfPartyMemberVoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="me.flyray.bsin.server.domain.jcxf.JcxfPartyMember">
+        <id column="id" property="id" />
+        <result column="username" property="username" />
+        <result column="password" property="password" />
+        <result column="dept_id" property="deptId" />
+        <result column="dept_out_id" property="deptOutId" />
+        <result column="real_name" property="realName" />
+        <result column="idcard" property="idcard" />
+        <result column="sex" property="sex" />
+        <result column="national" property="national" />
+        <result column="birthday" property="birthday" />
+        <result column="education" property="education" />
+        <result column="party_time" property="partyTime" />
+        <result column="transfer_time" property="transferTime" />
+        <result column="position" property="position" />
+        <result column="person_type" property="personType" />
+        <result column="phone" property="phone" />
+        <result column="telephone" property="telephone" />
+        <result column="address" property="address" />
+        <result column="party_state" property="partyState" />
+        <result column="party_state_date" property="partyStateDate" />
+        <result column="reserve_time" property="reserveTime" />
+        <result column="recover_time" property="recoverTime" />
+        <result column="stop_time" property="stopTime" />
+        <result column="dismiss_time" property="dismissTime" />
+        <result column="is_lost" property="isLost" />
+        <result column="lost_time" property="lostTime" />
+        <result column="is_flow" property="isFlow" />
+        <result column="flow_place" property="flowPlace" />
+        <result column="work_position" property="workPosition" />
+        <result column="avatar" property="avatar" />
+        <result column="profile_photo" property="profilePhoto" />
+        <result column="create_by" property="createBy" />
+        <result column="create_date" property="createDate" />
+        <result column="update_by" property="updateBy" />
+        <result column="update_date" property="updateDate" />
+        <result column="del_flag" property="delFlag" />
+        <result column="party_member_label" property="partyMemberLabel" />
+        <result column="is_ignore" property="isIgnore" />
+        <result column="app_login_date" property="appLoginDate" />
+        <result column="openid" property="openid" />
+        <result column="app_modify_login_date" property="appModifyLoginDate" />
+        <result column="is_first_secretary" property="isFirstSecretary" />
+        <result column="nick_name" property="nickName" />
+        <result column="area_id" property="areaId" />
+        <result column="area_name" property="areaName" />
+        <result column="work_unit" property="workUnit" />
+        <result column="is_float_in" property="isFloatIn" />
+        <result column="float_in_place" property="floatInPlace" />
+        <result column="is_suffer" property="isSuffer" />
+        <result column="is_poverty" property="isPoverty" />
+        <result column="is_outside_city" property="isOutsideCity" />
+        <result column="proxy_id" property="proxyId" />
+        <result column="family_sort" property="familySort" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, username, password, dept_id, dept_out_id, real_name, idcard, sex, national, birthday, education, party_time, transfer_time, position, person_type, phone, telephone, address, party_state, party_state_date, reserve_time, recover_time, stop_time, dismiss_time, is_lost, lost_time, is_flow, flow_place, work_position, avatar, profile_photo, create_by, create_date, update_by, update_date, del_flag, party_member_label, is_ignore, app_login_date, openid, app_modify_login_date, is_first_secretary, nick_name, area_id, area_name, work_unit, is_float_in, float_in_place, is_suffer, is_poverty, is_outside_city, pay_money, proxy_id, family_sort
+    </sql>
+
+</mapper>

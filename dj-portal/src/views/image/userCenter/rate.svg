@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>icon48*48/我的评价</title>
+    <desc>Created with Sketch.</desc>
+    <g id="icon48*48/我的评价" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g>
+            <circle id="椭圆形" fill-opacity="0.1" fill="#00AB7F" cx="24" cy="24" r="24"></circle>
+            <g id="edit" transform="translate(15.000000, 15.000000)" fill-rule="nonzero">
+                <rect id="矩形" fill="#000000" opacity="0" x="0" y="0" width="18" height="18"></rect>
+                <path d="M2.60515385,10.6497692 L2.60515385,12.9350769 L4.89115385,12.9350769 L13.1766923,4.64953846 L10.8913846,2.36353846 L2.60515385,10.6497692 Z M15.1352308,4.64953846 L5.46438461,14.3196923 L1.22053846,14.3196923 L1.22053846,10.0758461 L10.8913846,0.405692314 L15.1352308,4.64953846 Z M1.03846154,17.8179231 L1.03846154,16.4333077 L16.7794615,16.4333077 L16.7794615,17.8179231 L1.03846154,17.8179231 Z" id="形状" fill="#0C9363"></path>
+            </g>
+        </g>
+    </g>
+</svg>
