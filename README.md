@@ -129,14 +129,11 @@ SmartPartyBuilding
 ![](vx_images/20.png)
 
 问卷发布
-
 ![](vx_images/21.png)
 
 手机端问卷调查
-
 ![](vx_images/22.png)
 手机端投票
-
 ![](vx_images/23.png)
 ![](vx_images/24.png)
 ### 9、短信管理
