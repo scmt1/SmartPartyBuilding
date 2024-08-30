@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yami.shop.sys.common.dao.SysMenuMapper">
+
+    <select id="listMenuIdByRoleId" resultType="java.lang.Long">
+        select menu_id from tz_sys_role_menu where role_id = #{roleId}
+    </select>
+
+    <!-- 查询用户的所有菜单 -->
+    <select id="listMenuByUserId" resultType="com.yami.shop.sys.common.model.SysMenu">
+        SELECT DISTINCT m.menu_id AS menu_id,m.parent_id,m.name_en,
+        <if test="lang==1">IFNULL(m.name_en,m.name) AS name</if>
+        <if test="lang!=1">m.name</if>
+        ,url,m.type,m.icon,m.order_num,m.hidden FROM tz_sys_user_role ur
+        LEFT JOIN tz_sys_role_menu rm ON ur.role_id = rm.role_id LEFT JOIN tz_sys_menu m ON m.`menu_id` = rm.`menu_id`
+        WHERE ur.user_id = #{userId} and m.type != 2 order by order_num
+    </select>
+    <!-- 查询所有菜单 -->
+    <select id="listMenu" resultType="com.yami.shop.sys.common.model.SysMenu">
+        SELECT menu_id,parent_id,name_en,
+        <if test="lang==1">IFNULL(name_en,`name`) AS name</if>
+        <if test="lang!=1">`name`</if>
+        ,url,perms,`type`,icon,order_num,hidden FROM tz_sys_menu WHERE `type` != 2 ORDER BY order_num
+    </select>
+
+    <select id="listSimpleMenuNoButton" resultType="com.yami.shop.sys.common.model.SysMenu">
+        select menu_id ,parent_id ,name_en,
+        <if test="lang==1">IFNULL(name_en,`name`) AS name</if>
+        <if test="lang!=1">`name`</if>
+        from tz_sys_menu where `type` != 2 order by order_num
+    </select>
+
+    <select id="listRootMenu" resultType="com.yami.shop.sys.common.model.SysMenu">
+        select menu_id,name_en,
+        <if test="lang==1">IFNULL(name_en,`name`) AS name</if>
+        <if test="lang!=1">`name`</if>
+        from tz_sys_menu where `type` = 0
+    </select>
+
+    <select id="listChildrenMenuByParentId" resultType="com.yami.shop.sys.common.model.SysMenu">
+        select menu_id,name_en,
+        <if test="lang==1">IFNULL(name_en,`name`) AS name</if>
+        <if test="lang!=1">`name`</if>
+        from tz_sys_menu where parent_id = #{parentId}
+    </select>
+
+    <select id="listMenuAndBtn" resultType="com.yami.shop.sys.common.model.SysMenu">
+        SELECT menu_id,parent_id,name_en,
+        <if test="lang==1">IFNULL(name_en,`name`) AS name</if>
+        <if test="lang!=1">`name`</if>
+        ,url,perms,`type`,icon,order_num,hidden FROM tz_sys_menu order by order_num
+    </select>
+
+    <select id="listMenuNameByPerms" resultType="java.lang.String">
+        SELECT
+        <if test="lang != 1">
+            `name`
+        </if>
+        <if test="lang == 1">
+            name_en
+        </if>
+        FROM tz_sys_menu
+        WHERE menu_id IN (SELECT DISTINCT parent_id FROM tz_sys_menu WHERE perms LIKE CONCAT('%', #{perms}, '%'))
+    </select>
+
+    <update id="updateSonMenuState">
+        UPDATE tz_sys_menu SET hidden = #{state} WHERE parent_id = #{parentId}
+    </update>
+
+    <select id="listMenuPerms" resultType="java.lang.String">
+        SELECT perms FROM tz_sys_menu WHERE parent_id = #{parentId} AND type = 2
+    </select>
+
+    <select id="listConcealButtonPerms" resultType="java.lang.String">
+        SELECT perms FROM tz_sys_menu WHERE hidden = 1
+    </select>
+
+    <select id="listRoleMenuAndBtn" resultType="com.yami.shop.sys.common.model.SysMenu">
+        SELECT menu_id,parent_id,name_en,
+        <if test="lang==1">IFNULL(name_en,`name`) AS name</if>
+        <if test="lang!=1">`name`</if>
+        ,url,perms,`type`,icon,order_num,hidden FROM tz_sys_menu
+        WHERE
+        menu_id IN
+        (
+        SELECT sm.menu_id FROM tz_sys_role_menu AS rm INNER JOIN tz_sys_menu AS sm ON rm.menu_id = sm.menu_id WHERE rm.role_id IN
+            (SELECT role_id FROM tz_sys_user AS su INNER JOIN tz_sys_user_role AS ur ON su.user_id = ur.user_id WHERE su.user_id = #{userId})
+        )
+    </select>
+</mapper>
+

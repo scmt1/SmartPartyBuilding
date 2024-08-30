@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yami.shop.user.common.dao.UserGrowthLogMapper">
+
+  <resultMap id="userGrowthLogMap" type="com.yami.shop.user.common.model.UserGrowthLog">
+    <id column="log_id" property="logId" />
+    <result column="user_id" property="userId"/>
+    <result column="source" property="source"/>
+    <result column="biz_id" property="bizId"/>
+    <result column="change_growth" property="changeGrowth"/>
+    <result column="remarks" property="remarks"/>
+    <result column="create_time" property="createTime"/>
+  </resultMap>
+    <select id="getPage" resultType="com.yami.shop.user.common.model.UserGrowthLog">
+      SELECT ugl.*,u.nick_name,o.order_number FROM tz_user_growth_log ugl
+      JOIN tz_user u ON u.user_id = ugl.user_id
+      LEFT JOIN tz_order o ON o.order_id = ugl.biz_id
+      <where>
+        <if test="userGrowthLog.nickName != null">
+          u.nick_name LIKE CONCAT("%",#{userGrowthLog.nickName},"%")
+        </if>
+        <if test="userGrowthLog.source != null">
+          AND ugl.source  = #{userGrowthLog.source}
+        </if>
+      </where>
+    </select>
+  <select id="getPageByUserId" resultType="com.yami.shop.user.common.model.UserGrowthLog">
+    SELECT gl.biz_id,
+           gl.change_growth,
+           gl.remarks,
+           gl.create_time
+    FROM `tz_user_growth_log` gl
+    WHERE gl.user_id = #{userId}
+    ORDER BY gl.create_time DESC
+  </select>
+</mapper>

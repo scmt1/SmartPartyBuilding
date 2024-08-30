@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yami.shop.user.common.dao.UserTagMapper">
+
+    <resultMap id="userTagMap" type="com.yami.shop.user.common.model.UserTag">
+        <id column="user_tag_id" property="userTagId"/>
+        <result column="tag_name" property="tagName"/>
+        <result column="tag_type" property="tagType"/>
+        <result column="is_sys_turn_on" property="isSysTurnOn"/>
+        <result column="register_min_time" property="registerMinTime"/>
+        <result column="register_max_time" property="registerMaxTime"/>
+        <result column="subscribe_min_time" property="subscribeMinTime"/>
+        <result column="subscribe_max_time" property="subscribeMaxTime"/>
+        <result column="to_be_member_min_time" property="toBeMemberMinTime"/>
+        <result column="to_be_member_max_time" property="toBeMemberMaxTime"/>
+        <result column="recent_purchase_time" property="recentPurchaseTime"/>
+        <result column="purchase_num_time" property="purchaseNumTime"/>
+        <result column="purchase_num_min_num" property="purchaseNumMinNum"/>
+        <result column="purchase_num_max_num" property="purchaseNumMaxNum"/>
+        <result column="purchase_amount_time" property="purchaseAmountTime"/>
+        <result column="purchase_amount_min_amount" property="purchaseAmountMinAmount"/>
+        <result column="purchase_amount_max_amount" property="purchaseAmountMaxAmount"/>
+        <result column="order_average_price_time" property="orderAveragePriceTime"/>
+        <result column="order_average_price_min_amount" property="orderAveragePriceMinAmount"/>
+        <result column="order_average_price_max_amount" property="orderAveragePriceMaxAmount"/>
+        <result column="recharge_amount_time" property="rechargeAmountTime"/>
+        <result column="recharge_amount_min_amount" property="rechargeAmountMinAmount"/>
+        <result column="recharge_amount_max_amount" property="rechargeAmountMaxAmount"/>
+        <result column="recharge_num_time" property="rechargeNumTime"/>
+        <result column="recharge_num_min_num" property="rechargeNumMinNum"/>
+        <result column="recharge_num_max_num" property="rechargeNumMaxNum"/>
+        <result column="user_num" property="userNum"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="statistic_update_time" property="statisticUpdateTime"/>
+    </resultMap>
+    <update id="updateBatch">
+        <foreach collection="tagUser" item="changeUserNum" index="tagId" separator=";">
+            UPDATE `tz_user_tag` SET user_num = user_num + #{changeUserNum} where user_tag_id = #{tagId} and #{changeUserNum} + user_num >= 0
+        </foreach>
+    </update>
+    <select id="pageUserTagByParam" resultType="com.yami.shop.user.common.model.UserTag">
+        select * from `tz_user_tag`
+        <where>
+            <if test="tagType != null">
+                and tag_type = #{tagType}
+            </if>
+            <if test="tagName != null">
+                and trim(replace(tag_name,' ','')) like trim(replace(concat('%',#{tagName},'%'),' ',''))
+            </if>
+        </where>
+        order by create_time desc
+    </select>
+</mapper>

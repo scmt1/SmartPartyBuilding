@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yami.shop.user.common.dao.UserScoreLogMapper">
+
+  <resultMap id="userScoreLogMap" type="com.yami.shop.user.common.model.UserScoreLog">
+    <id column="log_id" property="logId" />
+    <result column="user_id" property="userId"/>
+    <result column="source" property="source"/>
+    <result column="biz_id" property="bizId"/>
+    <result column="io_type" property="ioType"/>
+    <result column="create_time" property="createTime"/>
+  </resultMap>
+  <select id="getConsecutiveDays" resultType="int">
+    SELECT COUNT(1) FROM (SELECT DATE_SUB(a.create_time, INTERVAL 1 DAY) signDate,
+                                 (@i := DATE_ADD(@i, INTERVAL - 1 DAY)) today
+    FROM(SELECT create_time FROM `tz_user_score_log` WHERE user_id = #{userId} AND source = 3 ORDER BY create_time DESC) a
+          INNER JOIN (SELECT@i := MAX(create_time) AS signMax FROM
+      `tz_user_score_log` WHERE user_id = #{userId} AND source = 3 AND (TO_DAYS(create_time) = TO_DAYS(CURDATE())
+      OR TO_DAYS(create_time) = TO_DAYS(DATE_ADD(CURDATE(), INTERVAL - 1 DAY)
+        ))) b ON b.signMax IS NOT NULL AND TO_DAYS(DATE_ADD(@i, INTERVAL - 1 DAY)) = TO_DAYS(
+            DATE_SUB(a.create_time, INTERVAL 1 DAY))) c
+  </select>
+    <select id="getPage" resultType="com.yami.shop.user.common.model.UserScoreLog">
+      SELECT usl.*,u.nick_name,o.order_number FROM tz_user_score_log usl
+      JOIN tz_user u ON u.user_id = usl.user_id
+      LEFT JOIN tz_order o ON o.order_number = usl.biz_id
+      <where>
+        <if test="userScoreLog.nickName != null">
+          u.nick_name LIKE CONCAT("%",#{userScoreLog.nickName},"%")
+        </if>
+        <if test="userScoreLog.orderNumber != null">
+          And o.order_number  LIKE CONCAT("%",#{userScoreLog.orderNumber},"%")
+        </if>
+        <if test="userScoreLog.source != null">
+          And usl.source = #{userScoreLog.source}
+        </if>
+        <if test="userScoreLog.ioType != null">
+          And usl.io_type = #{userScoreLog.ioType}
+        </if>
+      </where>
+    </select>
+    <select id="countSumScore" resultType="java.lang.Integer" parameterType="java.lang.String">
+      SELECT SUM(score) FROM `tz_user_score_log` usl
+      WHERE usl.io_type = 1 AND usl.user_id = #{userId}
+    </select>
+    <select id="getPageByUserId" resultType="com.yami.shop.user.common.model.UserScoreLog">
+      SELECT
+      sl.create_time,
+      sl.source,
+      sl.score,
+      sl.io_type,
+      sl.biz_id,
+      IF(ISNULL(o.`order_id`),0,1) as is_lock
+      FROM `tz_user_score_log` sl
+      LEFT JOIN `tz_order` o ON o.`order_number` = sl.`biz_id` AND o.`status` = 1
+      WHERE sl.user_id = #{userId}
+      ORDER BY sl.create_time DESC
+    </select>
+</mapper>

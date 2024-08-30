@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yami.shop.user.common.dao.UserScoreDetailMapper">
+
+  <resultMap id="scoreDetailMap" type="com.yami.shop.user.common.model.UserScoreDetail">
+    <id column="user_score_detail_id" property="userScoreDetailId" />
+    <result column="usable_score" property="usableScore"/>
+    <result column="biz_id" property="bizId"/>
+    <result column="create_time" property="createTime"/>
+    <result column="expire_time" property="expireTime"/>
+    <result column="status" property="status"/>
+  </resultMap>
+  <select id="listExpireScoreDetail" resultType="com.yami.shop.user.common.model.UserScoreDetail">
+      SELECT * FROM tz_user_score_detail WHERE
+      create_time <![CDATA[<]]> #{expireTime} AND `status` IN (0,1) and usable_score > 0
+  </select>
+
+  <!-- 批量更新状态 -->
+  <update id="updateExpireScoreDetail">
+    update tz_user_score_detail set status = -1 WHERE
+      create_time <![CDATA[<]]> #{expireTime} AND STATUS = 0
+  </update>
+
+  <select id="listByUserIdAndExpireTimeAndStatus" resultType="com.yami.shop.user.common.model.UserScoreDetail">
+    select *
+    from tz_user_score_detail
+    where user_id = #{userId}
+    and expire_time &lt; #{expireTime}
+    and status = #{status}
+  </select>
+
+  <select id="listByCreateTime" resultType="com.yami.shop.user.common.model.UserScoreDetail">
+    select *
+    from tz_user_score_detail
+    where user_id = #{userId}
+    and status = #{status}
+    order by create_time
+  </select>
+
+  <select id="listByCreateTimeAndPage" resultType="com.yami.shop.user.common.model.UserScoreDetail">
+    select *
+    from tz_user_score_detail
+    where user_id = #{userId}
+    and status = #{status}
+    order by create_time
+    limit #{current} , #{size}
+  </select>
+
+  <update id="batchUpdateUserScoreGetStatus">
+    UPDATE tz_user_score_detail
+    SET `status` = #{status}
+    WHERE user_score_detail_id IN
+    <foreach collection="userScoreGetIds" item="userScoreGetId" open="(" close=")" separator=",">
+      #{userScoreGetId}
+    </foreach>
+  </update>
+</mapper>

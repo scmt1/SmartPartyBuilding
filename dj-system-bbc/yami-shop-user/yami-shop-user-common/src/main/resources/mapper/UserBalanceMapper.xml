@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yami.shop.user.common.dao.UserBalanceMapper">
+
+  <resultMap id="userBalanceMap" type="com.yami.shop.user.common.model.UserBalance">
+    <id column="balance_id" property="balanceId" />
+    <result column="balance_title" property="balanceTitle"/>
+    <result column="recharge_amount" property="rechargeAmount"/>
+    <result column="img" property="img"/>
+    <result column="pres_amount" property="presAmount"/>
+    <result column="pres_score" property="presScore"/>
+    <result column="pres_growth" property="presGrowth"/>
+    <result column="seq" property="seq"/>
+    <collection property="couponList" ofType="com.yami.shop.user.common.model.Coupon">
+      <id column="coupon_id" jdbcType="BIGINT" property="couponId"/>
+      <result column="coupon_name" jdbcType="VARCHAR" property="couponName"/>
+      <result column="sub_title" jdbcType="VARCHAR" property="subTitle"/>
+      <result column="coupon_type" jdbcType="VARCHAR" property="couponType"/>
+      <result column="limit_num" jdbcType="VARCHAR" property="limitNum"/>
+      <result column="coupon_num" jdbcType="VARCHAR" property="couponNum"/>
+    </collection>
+  </resultMap>
+  <select id="getBalanceInfo" resultMap="userBalanceMap">
+    SELECT ub.*,c.coupon_id,c.coupon_name,c.sub_title,c.coupon_type,c.limit_num,ubc.coupon_num FROM  tz_user_balance ub
+    LEFT JOIN tz_user_balance_coupon ubc ON ub.balance_id = ubc.balance_id
+    LEFT JOIN tz_coupon c ON c.coupon_id = ubc.coupon_id
+    <if test="launch">
+      AND c.puton_status = 1
+    </if>
+    WHERE ub.balance_id = #{balanceId}
+  </select>
+  <select id="getBalanceList" resultMap="userBalanceMap">
+    SELECT ub.*,c.coupon_id,c.coupon_name,c.sub_title FROM  tz_user_balance ub
+    LEFT JOIN tz_user_balance_coupon ubc ON ub.balance_id = ubc.balance_id
+    LEFT JOIN tz_coupon c ON c.coupon_id = ubc.coupon_id AND c.puton_status = 1
+    ORDER BY ub.seq ASC,ub.recharge_amount ASC
+  </select>
+</mapper>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yami.shop.user.common.dao.UserScoreLockMapper">
+
+  <resultMap id="userScoreLockMap" type="com.yami.shop.user.common.model.UserScoreLock">
+    <id column="id" property="id" />
+    <result column="create_time" property="createTime"/>
+    <result column="update_time" property="updateTime"/>
+    <result column="user_id" property="userId"/>
+    <result column="order_number" property="orderNumber"/>
+    <result column="status" property="status"/>
+    <result column="score" property="score"/>
+    <result column="score_get_log_ids" property="scoreGetLogIds"/>
+  </resultMap>
+
+  <update id="unLockByIds">
+    update tz_user_score_lock
+    set status = #{status} where id in
+    <foreach collection="userScoreLockIds" item="userScoreLockId" separator="," open="(" close=")">
+      #{userScoreLockId}
+    </foreach>
+    and status = 0
+  </update>
+
+  <update id="unLockByOrderNumbers">
+    update tz_user_score_lock
+    set status = #{status} where order_number in
+    <foreach collection="orderNumbers" item="orderNumber" separator="," open="(" close=")">
+      #{orderNumber}
+    </foreach>
+    and status = 0
+  </update>
+
+  <select id="listUserScoreLocksByOrderNumber" resultMap="userScoreLockMap">
+    select *
+    from tz_user_score_lock where order_number=#{orderNumber}
+  </select>
+</mapper>

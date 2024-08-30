@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yami.shop.user.common.dao.UserLevelRightsMapper">
+
+
+  <insert id="insertBatchRights">
+    insert into tz_user_level_rights (level_id,rights_id) values
+    <foreach collection="rightsList" item="rightsId" separator=",">
+      (#{id},#{rightsId})
+    </foreach>
+  </insert>
+  <delete id="delBatchRights">
+    delete from tz_user_level_rights where level_id = #{id} and rights_id in
+    <foreach collection="rightsList" item="rightsId" open="(" separator="," close=")">
+      #{rightsId}
+    </foreach>
+  </delete>
+</mapper>

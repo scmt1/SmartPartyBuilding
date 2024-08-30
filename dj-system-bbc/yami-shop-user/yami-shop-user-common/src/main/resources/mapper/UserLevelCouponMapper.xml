@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yami.shop.user.common.dao.UserLevelCouponMapper">
+
+  <resultMap id="userLevelCategoryMap" type="com.yami.shop.user.common.model.UserLevelCoupon">
+    <id column="user_level_coupon_id" property="userLevelCouponId" />
+    <result column="level_id" property="levelId"/>
+    <result column="coupon_id" property="couponId"/>
+  </resultMap>
+  <insert id="insertBatchCoupon">
+    insert into tz_user_level_coupon (level_id,coupon_id) values
+    <foreach collection="coupons" item="couponId" separator=",">
+      (#{id},#{couponId})
+    </foreach>
+  </insert>
+  <delete id="delBatchCoupon">
+    delete from tz_user_level_coupon where level_id = #{id} and coupon_id in
+    <foreach collection="coupons" item="couponId" open="(" separator="," close=")">
+      #{couponId}
+    </foreach>
+  </delete>
+  <select id="getCouponListByLevelId" resultType="com.yami.shop.user.common.model.Coupon">
+    SELECT c.coupon_id,c.coupon_name FROM tz_user_level_coupon  ulc
+    JOIN tz_coupon c ON c.coupon_id = ulc.coupon_id
+    WHERE ulc.level_id = #{id}
+  </select>
+</mapper>
