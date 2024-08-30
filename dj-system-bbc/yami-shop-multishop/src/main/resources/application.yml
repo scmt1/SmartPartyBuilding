@@ -1,0 +1,78 @@
+spring:
+  # 环境 dev|prod|docker
+  profiles:
+    active: dev
+  #文件上传设置
+  servlet:
+    multipart:
+      max-file-size: 1024MB
+      max-request-size: 1024MB
+      enabled: true
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+      static-path-pattern: /**
+
+  web:
+    resources:
+      static-locations: classpath:/static/,classpath:/META-INF/resources/,classpath:/META-INF/resources/webjars/
+# mybaits-plus配置
+mybatis-plus:
+  # MyBatis Mapper所对应的XML文件位置
+  mapper-locations: classpath*:/mapper/*Mapper.xml
+  global-config:
+    # 关闭MP3.0自带的banner
+    banner: false
+    db-config:
+      # 主键类型 0:数据库ID自增 1.未定义 2.用户输入 3 id_worker 4.uuid 5.id_worker字符串表示
+      id-type: AUTO
+      #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+      field-strategy: NOT_NULL
+      # 默认数据库表下划线命名
+      table-underline: true
+server:
+  tomcat:
+    basedir: /temp
+# 用于雪花算法生成id
+application:
+  datacenterId: ${DATACENTER_ID:3}
+  workerId: ${WORKER_ID:1}
+
+  partyUrl: http://192.168.5.52:8089
+#密码加密传输，前端公钥加密，后端私钥解密
+rsa:
+  private_key: MIIBUwIBADANBgkqhkiG9w0BAQEFAASCAT0wggE5AgEAAkEA0vfvyTdGJkdbHkB8mp0f3FE0GYP3AYPaJF7jUd1M0XxFSE2ceK3k2kw20YvQ09NJKk+OMjWQl9WitG9pB6tSCQIDAQABAkA2SimBrWC2/wvauBuYqjCFwLvYiRYqZKThUS3MZlebXJiLB+Ue/gUifAAKIg1avttUZsHBHrop4qfJCwAI0+YRAiEA+W3NK/RaXtnRqmoUUkb59zsZUBLpvZgQPfj1MhyHDz0CIQDYhsAhPJ3mgS64NbUZmGWuuNKp5coY2GIj/zYDMJp6vQIgUueLFXv/eZ1ekgz2Oi67MNCk5jeTF2BurZqNLR3MSmUCIFT3Q6uHMtsB9Eha4u7hS31tj1UWE+D+ADzp59MGnoftAiBeHT7gDMuqeJHPL4b+kC+gzV4FGTfhR9q3tTbklZkD2A==
+  publicKey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBANL378k3RiZHWx5AfJqdH9xRNBmD9wGD2iRe41HdTNF8RUhNnHit5NpMNtGL0NPTSSpPjjI1kJfVorRvaQerUgkCAwEAAQ==
+#配置web页面入口
+magic-api:
+  web: /magic/web
+  resource:
+    type: database # 配置存储在数据库中
+    tableName: magic_api_file # 数据库中的表名
+    readonly: false # 是否是只读模式
+    support-cross-domain: true
+  support-cross-domain: true
+  swagger-config:
+    # 资源名称
+    name: 共享服务平台API
+    # 资源描述
+    description: 共享服务平台API v1.0 接口文档
+    #    # 资源位置
+    location: /v2/api-docs/interface/swagger2.json
+    # 文档版本
+    version: 1.0
+    # 文档标题
+    title:  共享服务平台API v1.0 接口文档
+    license:
+      name: xxx
+      url: xxx
+    host: /
+    concat:
+      name: ycy
+      url: localhost:8877/doc.html
+      email: xxxx@qq.com
+    tag:
+      name: xx
