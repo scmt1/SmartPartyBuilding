@@ -149,7 +149,7 @@ SmartPartyBuilding
 ![](vx_images/21.png)
 
 ### 11、门户
-![](vx_images/22.png)
+![](vx_images/221.png)
 
 ### 12、手机端
  ![首页](vx_images/23.png)         ![首页](vx_images/24.png)
