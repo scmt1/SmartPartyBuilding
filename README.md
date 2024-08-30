@@ -149,8 +149,10 @@ SmartPartyBuilding
 ![](vx_images/21.png)
 
 ### 11、门户
+<p align="center">
+	<img src="vx_images/221.png" />
+</p>
 
-![门户](vx_images/221.png)
 
 
 ### 12、手机端
