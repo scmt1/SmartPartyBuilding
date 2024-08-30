@@ -136,9 +136,7 @@ SmartPartyBuilding
 问卷发布
 ![](vx_images/15.png)
 
-手机端问卷调查
 ![](vx_images/16.png)![](vx_images/17.png)
-
 ![](vx_images/18.png)
 
 
