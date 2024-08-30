@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fc.v2.mapper.auto.GoviewProjectMapper">
+  <resultMap id="BaseResultMap" type="com.fc.v2.model.auto.GoviewProject">
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="project_name" jdbcType="VARCHAR" property="projectName" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_user_id" jdbcType="VARCHAR" property="createUserId" />
+    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+    <result column="index_image" jdbcType="VARCHAR" property="indexImage" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="tenant_id" jdbcType="VARCHAR" property="tenantId" />
+    <result column="org_id" jdbcType="VARCHAR" property="orgId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+
+	  	  	      	id,
+       	  	      	project_name,
+       	  	      	state,
+       	  	      	create_time,
+       	  	      	create_user_id,
+       	  	      	is_delete,
+       	  	      	index_image,
+       	  	    	  	remarks,
+       	  	    	  	tenant_id,
+       	  	    	  	org_id
+
+  </sql>
+
+  <select id="selectByExample" parameterType="com.fc.v2.model.auto.GoviewProjectExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_goview_project
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+      where is_delete=-1
+    </if>
+    <if test="tenantId != null">
+      and tenant_id=#{tenantId}
+    </if>
+    <if test="orgId != null">
+      and org_id=#{orgId}
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+
+
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_goview_project
+    where  is_delete=-1 and id = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_goview_project
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fc.v2.model.auto.GoviewProjectExample">
+    delete from t_goview_project
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+
+  <insert id="insert" parameterType="com.fc.v2.model.auto.GoviewProject">
+    insert into t_goview_project (
+      	  	       id,
+       	  	       project_name,
+       	  	       state,
+       	  	       create_time,
+       	  	       create_user_id,
+       	  	       is_delete,
+       	  	       index_image,
+                   remarks,
+                   tenantId,
+                   orgId
+       	    )
+    values (
+	  	  	      	#{id,jdbcType=VARCHAR},
+       	  	      	#{projectName,jdbcType=VARCHAR},
+       	  	      	#{state,jdbcType=INTEGER},
+       	  	      	#{createTime,jdbcType=TIMESTAMP},
+       	  	      	#{createUserId,jdbcType=VARCHAR},
+       	  	      	#{isDelete,jdbcType=INTEGER},
+       	  	      	#{indexImage,jdbcType=VARCHAR},
+       	  	    	  #{remarks,jdbcType=VARCHAR},
+       	  	    	  #{tenantId,jdbcType=VARCHAR},
+       	  	    	  #{orgId,jdbcType=VARCHAR}
+       	    )
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.fc.v2.model.auto.GoviewProject">
+    insert into t_goview_project
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+
+      <if test="id != null">
+        id,
+      </if>
+
+      <if test="projectName != null">
+        project_name,
+      </if>
+
+      <if test="state != null">
+        state,
+      </if>
+
+      <if test="createTime != null">
+        create_time,
+      </if>
+
+      <if test="createUserId != null">
+        create_user_id,
+      </if>
+
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+
+      <if test="indexImage != null">
+        index_image,
+      </if>
+
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="tenantId != null">
+        tenant_id,
+      </if>
+      <if test="orgId != null">
+        org_id,
+      </if>
+         </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+          <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+          <if test="projectName != null">
+        #{projectName,jdbcType=VARCHAR},
+      </if>
+          <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+          <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+          <if test="createUserId != null">
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+          <if test="isDelete != null">
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+          <if test="indexImage != null">
+        #{indexImage,jdbcType=VARCHAR},
+      </if>
+          <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantId != null">
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null">
+        #{orgId,jdbcType=VARCHAR},
+      </if>
+        </trim>
+  </insert>
+
+  <select id="countByExample" parameterType="com.fc.v2.model.auto.GoviewProjectExample" resultType="java.lang.Long">
+    select count(*) from t_goview_project
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+     where is_delete=-1
+  </select>
+
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_goview_project
+    <set>
+          <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+          <if test="record.projectName != null">
+        project_name = #{record.projectName,jdbcType=VARCHAR},
+      </if>
+          <if test="record.state != null">
+        state = #{record.state,jdbcType=INTEGER},
+      </if>
+          <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+          <if test="record.createUserId != null">
+        create_user_id = #{record.createUserId,jdbcType=VARCHAR},
+      </if>
+          <if test="record.isDelete != null">
+        is_delete = #{record.isDelete,jdbcType=INTEGER},
+      </if>
+          <if test="record.indexImage != null">
+        index_image = #{record.indexImage,jdbcType=VARCHAR},
+      </if>
+          <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+
+
+  <update id="updateByExample" parameterType="map">
+    update t_goview_project
+    set
+
+    	 id = #{record.id,jdbcType=VARCHAR},
+
+    	 project_name = #{record.projectName,jdbcType=VARCHAR},
+
+    	 state = #{record.state,jdbcType=INTEGER},
+
+    	 create_time = #{record.createTime,jdbcType=TIMESTAMP},
+
+    	 create_user_id = #{record.createUserId,jdbcType=VARCHAR},
+
+    	 is_delete = #{record.isDelete,jdbcType=INTEGER},
+
+    	 index_image = #{record.indexImage,jdbcType=VARCHAR},
+
+    	 remarks = #{record.remarks,jdbcType=VARCHAR}
+
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+
+
+      <update id="updateByPrimaryKeySelective" parameterType="com.fc.v2.model.auto.GoviewProject">
+    update t_goview_project
+    <set>
+
+      <if test="projectName != null">
+        project_name = #{projectName,jdbcType=VARCHAR},
+      </if>
+
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+
+      <if test="createUserId != null">
+        create_user_id = #{createUserId,jdbcType=VARCHAR},
+      </if>
+
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+
+      <if test="indexImage != null">
+        index_image = #{indexImage,jdbcType=VARCHAR},
+      </if>
+
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantId != null">
+        tenant_id = #{tenantId,jdbcType=VARCHAR},
+      </if>
+              </set>
+
+    where
+
+    id = #{id,jdbcType=VARCHAR}
+
+  </update>
+
+
+
+  <update id="updateByPrimaryKey" parameterType="com.fc.v2.model.auto.GoviewProject">
+    update t_goview_project
+    set
+
+		project_name = #{projectName,jdbcType=VARCHAR},
+
+		state = #{state,jdbcType=INTEGER},
+
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+
+		create_user_id = #{createUserId,jdbcType=VARCHAR},
+
+		is_delete = #{isDelete,jdbcType=INTEGER},
+
+		index_image = #{indexImage,jdbcType=VARCHAR},
+
+		remarks = #{remarks,jdbcType=VARCHAR}
+
+    where
+
+    id = #{id,jdbcType=VARCHAR}
+
+  </update>
+
+
+</mapper>

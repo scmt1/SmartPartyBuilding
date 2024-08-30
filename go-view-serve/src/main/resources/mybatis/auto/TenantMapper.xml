@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fc.v2.mapper.auto.TenantMapper">
+  <resultMap id="BaseResultMap" type="com.fc.v2.model.auto.SysTenant">
+    <result column="tenant_id" jdbcType="VARCHAR" property="tenantId" />
+    <result column="tenant_code" jdbcType="VARCHAR" property="tenantCode" />
+    <result column="tenant_name" jdbcType="VARCHAR" property="tenantName" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="logo" jdbcType="VARCHAR" property="logo" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="add_channel" jdbcType="VARCHAR" property="addChannel" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="del_flag" jdbcType="INTEGER" property="delFlag" />
+    <result column="contract_start_time" jdbcType="TIMESTAMP" property="contractStartTime" />
+    <result column="contract_end_time" jdbcType="TIMESTAMP" property="contractEndTime" />
+  </resultMap>
+  <select id="getTenantList" parameterType="com.fc.v2.model.auto.SysTenant" resultMap="BaseResultMap">
+    select * from sys_tenant
+     where del_flag = 0 and status = 0
+  </select>
+
+</mapper>
